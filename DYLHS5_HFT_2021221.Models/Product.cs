@@ -17,6 +17,12 @@ namespace DYLHS5_HFT_2021221.Models
         [Required]
         public string ProductName { get; set; }
 
+        [Required]
+        public string Color {  get; set; }
+
+        [Required]
+        public int Size {  get; set; }
+
         public int? BasePrice {  get; set; }
 
         [NotMapped]
@@ -25,11 +31,11 @@ namespace DYLHS5_HFT_2021221.Models
         public int BrandID { get; set; }
 
         [NotMapped]
-        public virtual List<Order> Orders { get; set; }
+        public virtual ICollection<Order> Orders { get; set; }
 
         public Product()
         {
-            Orders = new List<Order>();
+            Orders = new HashSet<Order>();
         }
     }
 }
