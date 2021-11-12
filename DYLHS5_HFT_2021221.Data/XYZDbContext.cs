@@ -40,20 +40,7 @@ namespace DYLHS5_HFT_2021221.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<Order>(entity =>
-            {
-                entity.HasOne(order => order.Product)
-                    .WithMany(product => product.Orders)
-                    .HasForeignKey(Order => Order.OrderId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
-            modelBuilder.Entity<Product>(entity =>
-            {
-                entity.HasOne(product => product.Brand)
-                    .WithMany(brand => brand.Products)
-                    .HasForeignKey(product => product.ProductId)
-                    .OnDelete(DeleteBehavior.ClientSetNull);
-            });
+           
 
             //BRANDS
             Brand dorko = new Brand() {BrandId = 1, BrandName = "Dorko" };
