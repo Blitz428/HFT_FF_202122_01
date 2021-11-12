@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Repository
 {
-    public abstract class BrandRepository : Repository<Brand>, IBrandRepository
+    public abstract class ProductRepository : Repository<Product>, IProductRepository
     {
-        public BrandRepository(XYZDbContext ctx) : base(ctx)
+        public ProductRepository(XYZDbContext ctx) : base(ctx)
         {
         }
-
     }
 }
