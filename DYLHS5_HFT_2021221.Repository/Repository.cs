@@ -14,9 +14,22 @@ namespace DYLHS5_HFT_2021221.Repository
         {
             this.ctx = ctx;
         }
+
+        public void AddNew(T newInstance)
+        {
+            ctx.Add(newInstance);
+        }
+
+        public void DeleteOld(T oldInstance)
+        {
+            ctx.Remove(oldInstance);
+        }
+
         public IQueryable<T> GetAll()
         {
             return ctx.Set<T>();
         }
+
+        public abstract T GetById(int id);
     }
 }

@@ -10,5 +10,10 @@ namespace DYLHS5_HFT_2021221.Repository
     public interface IRepository<T> where T: class
     {
 
+        public void AddNew(T newInstance);
+        public void DeleteOld(T oldInstance);
+        public IQueryable<T> GetAll();
+        public abstract T GetById(int id);
+
     }
 }

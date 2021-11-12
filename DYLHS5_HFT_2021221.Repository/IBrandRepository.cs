@@ -9,5 +9,6 @@ namespace DYLHS5_HFT_2021221.Repository
 {
     public interface IBrandRepository: IRepository<Brand>
     {
+
     }
 }
