@@ -13,6 +13,24 @@ namespace DYLHS5_HFT_2021221.Repository
         public BrandRepository(XYZDbContext ctx) : base(ctx)
         {
         }
+        protected XYZDbContext ctx;
+
+        public void AddNew(Brand newInstance)
+        {
+            ctx.Add(newInstance);
+        }
+
+        public void DeleteOld(Brand oldInstance)
+        {
+            ctx.Remove(oldInstance);
+        }
+
+        public IQueryable<Brand> GetAll()
+        {
+            return ctx.Set<Brand>();
+        }
+
+        public abstract Brand GetById(int id);
 
     }
 }

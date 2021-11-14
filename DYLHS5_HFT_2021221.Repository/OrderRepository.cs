@@ -13,5 +13,23 @@ namespace DYLHS5_HFT_2021221.Repository
         public OrderRepository(XYZDbContext ctx) : base(ctx)
         {
         }
+        protected XYZDbContext ctx;
+
+        public void AddNew(Order newInstance)
+        {
+            ctx.Add(newInstance);
+        }
+
+        public void DeleteOld(Order oldInstance)
+        {
+            ctx.Remove(oldInstance);
+        }
+
+        public IQueryable<Order> GetAll()
+        {
+            return ctx.Set<Order>();
+        }
+
+        public abstract Order GetById(int id);
     }
 }
