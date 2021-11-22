@@ -15,21 +15,43 @@ namespace DYLHS5_HFT_2021221.Repository
         }
         protected XYZDbContext ctx;
 
-        public void AddNew(Product newInstance)
+        public void Create(Product product)
         {
-            ctx.Add(newInstance);
+            ctx.Products.Add(product);
+            ctx.SaveChanges();
         }
 
-        public void DeleteOld(Product oldInstance)
+        public Product ReadOne(int productId)
         {
-            ctx.Remove(oldInstance);
+            return ctx.Products.FirstOrDefault(x => x.ProductId == productId);
         }
 
-        public IQueryable<Product> GetAll()
+        public IQueryable<Product> ReadAll()
         {
-            return ctx.Set<Product>();
+            return ctx.Products;
         }
 
-        public abstract Product GetById(int id);
+        public void Update(Product product)
+        {
+            Product old = ReadOne(product.ProductId);
+
+            old.Brand = product.Brand;
+            old.Orders = product.Orders;
+            old.BrandID = product.BrandID;
+            old.Orders = product.Orders;
+            old.BasePrice = product.BasePrice;
+            old.Size = product.Size;
+            old.Color = product.Color;
+            old.ProductName = product.ProductName;
+
+            ctx.SaveChanges();
+            
+        }
+
+        public void Delete(int productId)
+        {
+            ctx.Products.Remove(ReadOne(productId));
+            ctx.SaveChanges();
+        }
     }
 }

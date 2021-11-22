@@ -9,5 +9,10 @@ namespace DYLHS5_HFT_2021221.Repository
 {
     public interface IOrderRepository : IRepository<Order>
     {
+        void Create(Order order);
+        Order ReadOne(int orderId);
+        IQueryable<Order> ReadAll();
+        void Update(Order order);
+        void Delete(int orderId);
     }
 }

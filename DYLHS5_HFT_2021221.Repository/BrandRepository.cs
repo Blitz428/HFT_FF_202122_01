@@ -10,27 +10,42 @@ namespace DYLHS5_HFT_2021221.Repository
 {
     public abstract class BrandRepository : Repository<Brand>, IBrandRepository
     {
+        XYZDbContext ctx;
         public BrandRepository(XYZDbContext ctx) : base(ctx)
         {
+            this.ctx = ctx;
         }
-        protected XYZDbContext ctx;
 
-        public void AddNew(Brand newInstance)
+        public void Create(Brand brand)
         {
-            ctx.Add(newInstance);
+            ctx.Brands.Add(brand);
+            ctx.SaveChanges();
         }
 
-        public void DeleteOld(Brand oldInstance)
+        public void Delete(int brandId)
         {
-            ctx.Remove(oldInstance);
+            ctx.Brands.Remove(ReadOne(brandId));
+            ctx.SaveChanges();
         }
 
-        public IQueryable<Brand> GetAll()
+        public IQueryable<Brand> ReadAll()
         {
-            return ctx.Set<Brand>();
+            return ctx.Brands;
         }
 
-        public abstract Brand GetById(int id);
+        public Brand ReadOne(int brandId)
+        {
+            return ctx.Brands.FirstOrDefault(x => x.BrandId == brandId);
+        }
 
+        public void Update(Brand brand)
+        {
+            Brand old = ReadOne(brand.BrandId);
+
+            old.BrandName = brand.BrandName;
+            old.Products = brand.Products;
+            
+            ctx.SaveChanges();
+        }
     }
 }

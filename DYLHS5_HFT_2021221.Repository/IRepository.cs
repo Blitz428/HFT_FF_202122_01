@@ -9,7 +9,7 @@ namespace DYLHS5_HFT_2021221.Repository
 {
     public interface IRepository<T> where T: class
     {
-        public IQueryable<T> GetAll();
+       
       
 
     }
