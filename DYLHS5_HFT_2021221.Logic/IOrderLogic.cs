@@ -9,9 +9,13 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public interface IOrderLogic
     {
+        double HighestPrice();
+
         void Create(Order order);
         IQueryable<Order> ReadAll();
         void Update(Order order);
         void Delete(int orderId);
+        IEnumerable<KeyValuePair<string, double>> HighestPricedOrder();
+           
     }
 }

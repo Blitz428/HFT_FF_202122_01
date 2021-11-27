@@ -24,7 +24,7 @@ namespace DYLHS5_HFT_2021221.Models
         [Required]
         public int Size {  get; set; }
 
-        public int? Price {  get; set; }
+        public double? Price {  get; set; }
 
 
         [NotMapped]
