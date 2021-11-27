@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Repository
 {
-    public interface IBrandRepository: IRepository<Customer>
+    public interface ICustomerRepository: IRepository<Customer>
     {
-        void Create(Customer brand);
-        Customer ReadOne(int brandId);
+        void Create(Customer customer);
+        Customer ReadOne(int customerId);
         IQueryable<Customer> ReadAll();
-        void Update(Customer brand);
-        void Delete(int brandId);
+        void Update(Customer customer);
+        void Delete(int customerId);
     }
 }

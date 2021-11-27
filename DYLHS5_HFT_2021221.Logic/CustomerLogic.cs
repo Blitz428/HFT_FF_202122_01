@@ -10,9 +10,9 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public class CustomerLogic : ICustomerLogic
     {
-        IBrandRepository repo;
+        ICustomerRepository repo;
 
-        public CustomerLogic(IBrandRepository repo)
+        public CustomerLogic(ICustomerRepository repo)
         {
             this.repo = repo;
         }

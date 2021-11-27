@@ -35,14 +35,14 @@ namespace DYLHS5_HFT_2021221.Repository
         {
             Product old = ReadOne(product.ProductId);
 
-            //old.Brand = product.Brand;
             old.Orders = product.Orders;
-            
             old.Orders = product.Orders;
             old.Price = product.Price;
             old.Size = product.Size;
             old.Color = product.Color;
             old.ProductName = product.ProductName;
+            old.ProductId = product.ProductId;
+            
 
             ctx.SaveChanges();
             
