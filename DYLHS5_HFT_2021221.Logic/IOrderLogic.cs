@@ -16,6 +16,11 @@ namespace DYLHS5_HFT_2021221.Logic
         void Update(Order order);
         void Delete(int orderId);
         IEnumerable<KeyValuePair<string, double>> HighestPricedOrder();
-           
+        IEnumerable<KeyValuePair<string, double>> SumOrdersOfCustomers();
+        IEnumerable<Order> OrderFindByColor(string color);
+        IEnumerable<string> CustomerFindByPrePaidOrder();
+        public IEnumerable<string> CustomersWhoNeedTransport();
+
+
     }
 }
