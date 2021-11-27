@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Models
 {
+    [Table("Products")]
     public class Product
     {
         [Key]
@@ -23,19 +24,11 @@ namespace DYLHS5_HFT_2021221.Models
         [Required]
         public int Size {  get; set; }
 
-        public int? BasePrice {  get; set; }
+        public int? Price {  get; set; }
+
 
         [NotMapped]
-        public virtual Brand Brand {  get; set; }
+        public virtual ICollection<Order> Orders {  get; set;}
 
-        public int BrandID { get; set; }
-
-        [NotMapped]
-        public virtual ICollection<Order> Orders { get; set; }
-
-        public Product()
-        {
-            Orders = new HashSet<Order>();
-        }
     }
 }

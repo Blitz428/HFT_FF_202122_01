@@ -8,17 +8,33 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Models
 {
+    [Table("Orders")]
     public class Order
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int OrderId { get; set; }
 
-        [Required]
+        public int ProductId { get; set; }
+
+
+        public int CustomerId { get; set; }
+
+        public bool IsPrePaid {  get; set; }
+
+        public bool IsTransportRequired { get; set; }
+        
+        public virtual DateTime OrderTime { set { OrderTime = DateTime.Now; } }
+
+        [NotMapped]
         public virtual Product Product {  get; set; }
-
-        [Required]
-        public virtual DateTime OrderTime {  get; set; }
-
+        [NotMapped]
+        public virtual Customer Customer {  get; set; }
+       
+        public virtual ICollection<Order> Orders {  get; set; }
+        public Order()
+        {
+            Orders= new HashSet<Order>();
+        }
     }
 }

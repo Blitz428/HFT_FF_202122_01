@@ -8,15 +8,15 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Logic
 {
-    public class BrandLogic : IBrandLogic
+    public class CustomerLogic : ICustomerLogic
     {
         IBrandRepository repo;
 
-        public BrandLogic(IBrandRepository repo)
+        public CustomerLogic(IBrandRepository repo)
         {
             this.repo = repo;
         }
-        public void Create(Brand brand)
+        public void Create(Customer brand)
         {
             repo.Create(brand);
         }
@@ -26,12 +26,12 @@ namespace DYLHS5_HFT_2021221.Logic
             repo.Delete(brandId);
         }
 
-        public IQueryable<Brand> ReadAll()
+        public IQueryable<Customer> ReadAll()
         {
             return repo.ReadAll();
         }
 
-        public void Update(Brand brand)
+        public void Update(Customer brand)
         {
             repo.Update(brand);
         }

@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Logic
 {
-    public interface IBrandLogic
+    public interface ICustomerLogic
     {
-        void Create(Brand brand);
-        IQueryable<Brand> ReadAll();
-        void Update(Brand brand);
+        void Create(Customer brand);
+        IQueryable<Customer> ReadAll();
+        void Update(Customer brand);
         void Delete(int brandId);
     }
 }

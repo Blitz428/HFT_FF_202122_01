@@ -36,7 +36,7 @@ namespace DYLHS5_HFT_2021221.Repository
             Order old = ReadOne(order.OrderId);
 
             old.Product = order.Product;
-            old.OrderTime = order.OrderTime;
+            
 
             ctx.SaveChanges();
             
