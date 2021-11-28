@@ -20,6 +20,19 @@ namespace DYLHS5_HFT_2021221.Logic
         public void Create(Order order)
         {
             repo.Create(order);
+            if (order.Product.ProductName==null ||order.Customer.CustomerName==null)
+            {
+                throw new ProductOrCustomerNameMissingException("The customers or products name is missing, can't create that order.");
+            }
+            if (order.Product==null || order.Customer ==null)
+            {
+                throw new NullReferenceException("Missing product or customer while creating order.");
+            }
+            if (order.IsTransportRequired==null || order.IsPrePaid==null)
+            {
+                throw new BooleanExpressionsAreNullException("One of the boolean expressions are missing, please fix.");
+            }
+            
         }
 
         public void Delete(int orderId)
@@ -37,10 +50,10 @@ namespace DYLHS5_HFT_2021221.Logic
             repo.Update(order);
         }
 
-        public IEnumerable<KeyValuePair<string, double>> HighestPricedOrder() //returns the highest priced order
+        public IEnumerable<KeyValuePair<double, int>> HighestPricedOrder() //returns the highest priced orders ID
         {
             return repo.ReadAll().GroupBy(x => x.Product)
-                .Select(x => new KeyValuePair<string, double>(x.Key.ProductName, x.Max(x => x.Product.Price) ?? 0));
+                .Select(x => new KeyValuePair<double, int>(HighestPrice(), x.Key.Orders.First().CustomerId));
                 
 
         }
@@ -51,12 +64,13 @@ namespace DYLHS5_HFT_2021221.Logic
         }
 
 
-        public IEnumerable<KeyValuePair<string, double>> SumOrdersOfCustomers() //summerizes the money spent by the customers
-        {
-            return repo.ReadAll().GroupBy(x => x.Customer)
-                .Select(x => new KeyValuePair<string, double>(x.Key.CustomerName,x.Sum(x=>x.Product.Price) ??0));
-
+        public IEnumerable<Customer> CustomersBiggerThanThisShoeSize(int size) //returns the customers that have bigger shoe size than the parameter
+        { 
+        
+            return repo.ReadAll().Where(x=>x.Product.Size > size).Select(x=>x.Customer);
+        
         }
+        
 
         public IEnumerable<Order> OrderFindByColor(string color) //finds the orders with the specified shoe color
         {
@@ -65,12 +79,12 @@ namespace DYLHS5_HFT_2021221.Logic
 
         public IEnumerable<string> CustomerFindByPrePaidOrder() //finds the customers with prepaid orders
         {
-            return repo.ReadAll().Where(x=>x.IsPrePaid==true).Select(x => x.Customer.CustomerName);
+            return repo.ReadAll().Where(x=>x.IsPrePaid==true).Select(x => x.Customer.CustomerName).Distinct();
         }
 
         public IEnumerable<string> CustomersWhoNeedTransport() //finds the customers who need transport for their order(s)
         {
-            return repo.ReadAll().Where(x=>x.IsPrePaid==true).Select(x => x.Customer.CustomerName);
+            return repo.ReadAll().Where(x=>x.IsTransportRequired==true).Select(x => x.Customer.CustomerName).Distinct();
         }
     
         

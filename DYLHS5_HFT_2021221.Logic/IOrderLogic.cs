@@ -15,12 +15,11 @@ namespace DYLHS5_HFT_2021221.Logic
         IQueryable<Order> ReadAll();
         void Update(Order order);
         void Delete(int orderId);
-        IEnumerable<KeyValuePair<string, double>> HighestPricedOrder();
-        IEnumerable<KeyValuePair<string, double>> SumOrdersOfCustomers();
+        IEnumerable<KeyValuePair<double, int>> HighestPricedOrder();
         IEnumerable<Order> OrderFindByColor(string color);
         IEnumerable<string> CustomerFindByPrePaidOrder();
-        public IEnumerable<string> CustomersWhoNeedTransport();
-
+        IEnumerable<string> CustomersWhoNeedTransport();
+        IEnumerable<Customer> CustomersBiggerThanThisShoeSize(int size);
 
     }
 }

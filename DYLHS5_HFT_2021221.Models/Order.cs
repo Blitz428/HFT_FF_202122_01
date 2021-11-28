@@ -20,9 +20,11 @@ namespace DYLHS5_HFT_2021221.Models
 
         public int CustomerId { get; set; }
 
-        public bool IsPrePaid {  get; set; }
+        [Required]
+        public bool? IsPrePaid {  get; set; }
 
-        public bool IsTransportRequired { get; set; }
+        [Required]
+        public bool? IsTransportRequired { get; set; }
         
         public virtual DateTime OrderTime { set { OrderTime = DateTime.Now; } }
 
