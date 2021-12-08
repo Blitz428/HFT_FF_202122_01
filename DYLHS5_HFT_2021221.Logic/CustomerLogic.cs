@@ -28,6 +28,11 @@ namespace DYLHS5_HFT_2021221.Logic
             return repo.GetAll();
         }
 
+        public Customer GetOne(int customerId)
+        {
+            return repo.ReadOne(customerId);
+        }
+
         public IQueryable<Customer> ReadAll()
         {
             return repo.ReadAll();

@@ -28,6 +28,11 @@ namespace DYLHS5_HFT_2021221.Endpoint.Controllers
         {
             return logic.ReadAll();
         }
+        [HttpGet("{productId}")] // /product
+        public Product GetOne([FromRoute] int productId)
+        {
+            return logic.GetOne(productId);
+        }
 
         [HttpPut]
         public void UpdateOne([FromBody] Product product)

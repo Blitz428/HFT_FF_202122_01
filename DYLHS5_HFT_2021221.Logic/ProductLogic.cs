@@ -40,7 +40,9 @@ namespace DYLHS5_HFT_2021221.Logic
             repo.Update(product);
         }
 
-
-
+        public Product GetOne(int productId)
+        {
+            return repo.ReadOne(productId);
+        }
     }
 }

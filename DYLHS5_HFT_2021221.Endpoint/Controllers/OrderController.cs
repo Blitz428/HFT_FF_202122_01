@@ -40,5 +40,11 @@ namespace DYLHS5_HFT_2021221.Endpoint.Controllers
         {
             logic.Delete(orderId);
         }
+
+        [HttpGet("{orderId}")] // /order/orderId
+        public Order GetOne([FromRoute] int orderId)
+        {
+            return logic.GetOne(orderId);
+        }
     }
 }

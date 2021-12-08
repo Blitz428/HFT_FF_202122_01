@@ -14,5 +14,7 @@ namespace DYLHS5_HFT_2021221.Logic
         void Update(Product product);
         void Delete(int productId);
         IQueryable<Product> GetAll();
+
+        Product GetOne(int productId);
     }
 }

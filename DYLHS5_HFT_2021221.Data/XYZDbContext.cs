@@ -89,7 +89,6 @@ namespace DYLHS5_HFT_2021221.Data
                 .HasForeignKey(customer => customer.CustomerId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
 
-
             });
             modelBuilder.Entity<Order>(entity =>
             {
@@ -102,8 +101,6 @@ namespace DYLHS5_HFT_2021221.Data
                 .WithMany(product => product.Orders)
                 .HasForeignKey(order => order.ProductId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
-
-
 
             });
 

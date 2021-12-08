@@ -90,7 +90,10 @@ namespace DYLHS5_HFT_2021221.Logic
         {
             return repo.ReadAll().Where(x=>x.IsTransportRequired==true).Select(x => x.Customer.CustomerName).Distinct();
         }
-    
-        
+
+        public Order GetOne(int orderId)
+        {
+            return repo.ReadOne(orderId);
+        }
     }
 }
