@@ -16,9 +16,8 @@ namespace DYLHS5_HFT_2021221.Logic
         IQueryable<Order> ReadAll();
         void Update(Order order);
         void Delete(int orderId);
-
         Order GetOne (int orderId);
-        IEnumerable<KeyValuePair<double, int>> HighestPricedOrder();
+        
         IEnumerable<Order> OrderFindByColor(string color);
         IEnumerable<string> CustomerFindByPrePaidOrder();
         IEnumerable<string> CustomersWhoNeedTransport();

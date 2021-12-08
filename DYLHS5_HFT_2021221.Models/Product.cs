@@ -14,7 +14,7 @@ namespace DYLHS5_HFT_2021221.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
         [Required]
         public string ProductName { get; set; }

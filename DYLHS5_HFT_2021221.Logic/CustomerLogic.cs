@@ -1,4 +1,5 @@
-﻿using DYLHS5_HFT_2021221.Models;
+﻿using DYLHS5_HFT_2021221.Logic.Exceptions;
+using DYLHS5_HFT_2021221.Models;
 using DYLHS5_HFT_2021221.Repository;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,14 @@ namespace DYLHS5_HFT_2021221.Logic
         }
         public void Create(Customer customer)
         {
+            if (customer.CustomerId==null)
+            {
+                throw new IdMissingException("Missing customer ID");
+            }
+            if (customer.CustomerName==null)
+            {
+                throw new ProductOrCustomerNameMissingException("Missing cutomer name");
+            }
             repo.Create(customer);
         }
 

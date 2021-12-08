@@ -13,12 +13,12 @@ namespace DYLHS5_HFT_2021221.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int OrderId { get; set; }
+        public int? OrderId { get; set; }
 
-        public int ProductId { get; set; }
+        public int? ProductId { get; set; }
 
 
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         [Required]
         public bool? IsPrePaid {  get; set; }

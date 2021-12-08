@@ -1,4 +1,5 @@
-﻿using DYLHS5_HFT_2021221.Models;
+﻿using DYLHS5_HFT_2021221.Logic.Exceptions;
+using DYLHS5_HFT_2021221.Models;
 using DYLHS5_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,14 @@ namespace DYLHS5_HFT_2021221.Logic
 
         public void Create(Product product)
         {
+            if (product.ProductName==null)
+            {
+                throw new ProductOrCustomerNameMissingException("Product name missing!");
+            }
+            if (product.ProductId==null)
+            {
+                throw new IdMissingException("Missing product ID");
+            }
             repo.Create(product);
         }
 

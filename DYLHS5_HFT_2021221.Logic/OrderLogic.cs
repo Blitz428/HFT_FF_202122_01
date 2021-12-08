@@ -1,4 +1,5 @@
-﻿using DYLHS5_HFT_2021221.Models;
+﻿using DYLHS5_HFT_2021221.Logic.Exceptions;
+using DYLHS5_HFT_2021221.Models;
 using DYLHS5_HFT_2021221.Repository;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,6 @@ namespace DYLHS5_HFT_2021221.Logic
 
         public void Create(Order order)
         {
-            repo.Create(order);
             if (order.Product.ProductName==null ||order.Customer.CustomerName==null)
             {
                 throw new ProductOrCustomerNameMissingException("The customers or products name is missing, can't create that order.");
@@ -36,7 +36,12 @@ namespace DYLHS5_HFT_2021221.Logic
             {
                 throw new BooleanExpressionsAreNullException("One of the boolean expressions are missing, please fix.");
             }
-            
+            if (order.OrderId==null)
+            {
+                throw new IdMissingException("Missing order ID");
+            }
+            repo.Create(order);
+
         }
 
         public void Delete(int orderId)

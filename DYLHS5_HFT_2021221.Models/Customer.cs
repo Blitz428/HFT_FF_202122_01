@@ -10,7 +10,7 @@ namespace DYLHS5_HFT_2021221.Models
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int CustomerId { get; set; }
+        public int? CustomerId { get; set; }
 
         [Required]
         public string CustomerName { get; set; }
