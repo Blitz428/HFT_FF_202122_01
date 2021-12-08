@@ -54,13 +54,7 @@ namespace DYLHS5_HFT_2021221.Logic
             repo.Update(order);
         }
 
-        public IEnumerable<KeyValuePair<double, int>> HighestPricedOrder() //returns the highest priced orders ID
-        {
-            return repo.ReadAll().GroupBy(x => x.Product)
-                .Select(x => new KeyValuePair<double, int>(HighestPrice(), x.Key.Orders.First().CustomerId));
-                
 
-        }
 
         public double HighestPrice()
         {

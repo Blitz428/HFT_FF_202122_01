@@ -19,103 +19,44 @@ namespace DYLHS5_HFT_2021221.Test
         {
             Mock<IOrderRepository> mockedRepo = new Mock<IOrderRepository>();
 
-            Product dorko1 = new Product() { ProductName = "BOUNCE", Color = "BROWN", Size = 41, Price = 24999 };
-            Product dorko2 = new Product() { ProductName = "CARBONITE", Color = "BLACK", Size = 42, Price = 24999 };
+            //PRODUCTS
+            Product dorko1 = new Product() { ProductId = 1, ProductName = "BOUNCE", Color = "BROWN", Size = 41, Price = 24999 };
+            Product dorko2 = new Product() { ProductId = 2, ProductName = "CARBONITE", Color = "BLACK", Size = 42, Price = 24999 };
 
-            Product adidas1 = new Product() { ProductName = "ORIGINALS CONTINENTAL 80 STRIPES", Color = "BLACK", Size = 42, Price = 29999 };
-            Product adidas2 = new Product() { ProductName = "PERFORMANCE HOOPS MID 2.0 K", Color = "BLACK", Size = 40, Price = 14999 };
+            Product adidas1 = new Product() { ProductId = 3, ProductName = "ORIGINALS CONTINENTAL 80 STRIPES", Color = "BLACK", Size = 42, Price = 29999 };
+            Product adidas2 = new Product() { ProductId = 4, ProductName = "PERFORMANCE HOOPS MID 2.0 K", Color = "BLACK", Size = 40, Price = 14999 };
 
-            Product nike1 = new Product() { ProductName = "AIR PRESTO", Color = "ORANGE", Size = 40, Price = 44999 };
-            Product nike2 = new Product() { ProductName = "REVOLUTION 5", Color = "GREY", Size = 45, Price = 19999 };
+            Product nike1 = new Product() { ProductId = 5, ProductName = "AIR PRESTO", Color = "ORANGE", Size = 40, Price = 44999 };
+            Product nike2 = new Product() { ProductId = 6, ProductName = "REVOLUTION 5", Color = "GREY", Size = 45, Price = 19999 };
 
-            Product converse1 = new Product() { ProductName = "RIVAL", Color = "GREY", Size = 41, Price = 24999 };
-            Product converse2 = new Product() { ProductName = "COURTLANDT", Color = "GREY", Size = 44, Price = 9999 };
+            Product converse1 = new Product() { ProductId = 7, ProductName = "RIVAL", Color = "GREY", Size = 41, Price = 24999 };
+            Product converse2 = new Product() { ProductId = 8, ProductName = "COURTLANDT", Color = "GREY", Size = 44, Price = 9999 };
 
-            Product vans1 = new Product() { ProductName = "OLD SKOOL", Color = "BLUE", Size = 41, Price = 29999 };
-            Product vans2 = new Product() { ProductName = "ULTRARANGE EXO", Color = "BLACK", Size = 40, Price = 39999 };
+            Product vans1 = new Product() { ProductId = 9, ProductName = "OLD SKOOL", Color = "BLUE", Size = 41, Price = 29999 };
+            Product vans2 = new Product() { ProductId = 10, ProductName = "ULTRARANGE EXO", Color = "BLACK", Size = 40, Price = 39999 };
 
-            Customer customer1 = new Customer() { CustomerName = "A.Aladár", PhoneNumber = 06701234567, Address = "Randomcím1" };
-            Customer customer2 = new Customer() { CustomerName = "B.Bence", PhoneNumber = 06701234568 };
-            Customer customer3 = new Customer() { CustomerName = "C.Cecília", PhoneNumber = 06701234569, Address = "Randomcim2" };
-            Customer customer4 = new Customer() { CustomerName = "D.Dávid", PhoneNumber = 06701234570 };
-            Customer customer5 = new Customer() { CustomerName = "E.Elvira", PhoneNumber = 06701234571 };
+            //CUSTOMERS
+            Customer customer1 = new Customer() { CustomerId = 1, CustomerName = "A.Aladár", Address = "Randomcím1", PhoneNumber = 06701234567 };
+            Customer customer2 = new Customer() { CustomerId = 2, CustomerName = "B.Bence", PhoneNumber = 06701234568 };
+            Customer customer3 = new Customer() { CustomerId = 3, CustomerName = "C.Cecília", PhoneNumber = 06701234569, Address = "Randomcim2" };
+            Customer customer4 = new Customer() { CustomerId = 4, CustomerName = "D.Dávid", PhoneNumber = 06701234570 };
+            Customer customer5 = new Customer() { CustomerId = 5, CustomerName = "E.Elvira", PhoneNumber = 06701234571 };
+
+            //ORDERS
+            Order order1 = new Order() { OrderId = 1, ProductId = dorko1.ProductId, CustomerId = customer1.CustomerId, IsPrePaid = true, IsTransportRequired = false };
+            Order order2 = new Order() { OrderId = 2, ProductId = dorko2.ProductId, CustomerId = customer2.CustomerId, IsPrePaid = false, IsTransportRequired = true };
+            Order order3 = new Order() { OrderId = 3, ProductId = adidas1.ProductId, CustomerId = customer1.CustomerId, IsPrePaid = true, IsTransportRequired = false };
+            Order order4 = new Order() { OrderId = 4, ProductId = adidas2.ProductId, CustomerId = customer2.CustomerId, IsPrePaid = true, IsTransportRequired = true };
+            Order order5 = new Order() { OrderId = 5, ProductId = nike1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false };
+            Order order6 = new Order() { OrderId = 6, ProductId = nike2.ProductId, CustomerId = customer4.CustomerId, IsPrePaid = true, IsTransportRequired = false };
+            Order order7 = new Order() { OrderId = 7, ProductId = converse1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false };
+            Order order8 = new Order() { OrderId = 8, ProductId = converse2.ProductId, CustomerId = customer4.CustomerId, IsPrePaid = true, IsTransportRequired = true };
+            Order order9 = new Order() { OrderId = 9, ProductId = vans1.ProductId, CustomerId = customer5.CustomerId, IsPrePaid = true, IsTransportRequired = true };
+            Order order10 = new Order() { OrderId = 10, ProductId = vans2.ProductId, CustomerId = customer5.CustomerId, IsPrePaid = true, IsTransportRequired = true };
 
             mockedRepo.Setup(x => x.ReadAll())
                 .Returns(new List<Order>()
-            {
-                    new Order() //1
-                    {
-                        Product = dorko1,
-                        Customer = customer1,
-                        IsPrePaid = true,
-                        IsTransportRequired = false
-                    },
-                    new Order() //2
-                    {
-                        Product = dorko2,
-                        Customer = customer2,
-                        IsPrePaid = false,
-                        IsTransportRequired = true
-                    },
-                    new Order() //3
-                    {
-                        Product = adidas1,
-                        Customer = customer1,
-                        IsPrePaid = true,
-                        IsTransportRequired = false
-                    },
-                    new Order() //4
-                    {
-                        Product = adidas2,
-                        Customer = customer2,
-                        IsPrePaid = true,
-                        IsTransportRequired = true
-                    },
-                    new Order() //5
-                    {
-                        Product = nike1,
-                        Customer = customer3,
-                        IsPrePaid = false,
-                        IsTransportRequired = false
-                    },
-                    new Order()
-                    {
-                        Product = nike2,
-                        Customer = customer4,
-                        IsPrePaid = true,
-                        IsTransportRequired = false
-                    },
-                    new Order()
-                    {
-                        Product = converse1,
-                        Customer = customer3,
-                        IsPrePaid = false,
-                        IsTransportRequired = false
-                    },
-                    new Order()
-                    {
-                        Product = converse2,
-                        Customer = customer4,
-                        IsPrePaid = true,
-                        IsTransportRequired = true
-                    },
-                    new Order()
-                    {
-                        Product = vans1,
-                        Customer = customer5,
-                        IsPrePaid = true,
-                        IsTransportRequired = true
-                    },
-                    new Order()
-                    {
-                        Product = vans2,
-                        Customer = customer5,
-                        IsPrePaid = true,
-                        IsTransportRequired = true
-                    },
-
-
-            }.AsQueryable());
+                {order1,order2,order3,order4,order5,order6,order7,order8,order9,order10}.AsQueryable());
 
             logic = new OrderLogic(mockedRepo.Object);
 
@@ -198,6 +139,7 @@ namespace DYLHS5_HFT_2021221.Test
         [Test]
         public void HighestPricedOrderTest()
         {
+            logic.HighestPricedOrder();
             Assert.AreEqual(49000, logic.HighestPricedOrder());
 
         }
@@ -208,19 +150,8 @@ namespace DYLHS5_HFT_2021221.Test
             Assert.AreEqual(10, logic.ReadAll().Count());
         }
 
-        [Test]
-        public void UpdateOrderTest()
-        {
-            Product dorko3 = new Product() {ProductName = "TEST", Color = "GREEN", Size = 42, Price = 20099 };
-            Customer customer6 = new Customer() {CustomerName = "F.Ferenc", PhoneNumber = 06701234572, Address = "Randomcím3" };
-            Order test = new Order() {IsPrePaid = true, IsTransportRequired = false, Product = dorko3, Customer = customer6 };
+        
 
-            logic.Update(test);
-
-            Assert.IsTrue(logic.ReadAll().Contains(test));
-            
-
-        }
 
     }
 }

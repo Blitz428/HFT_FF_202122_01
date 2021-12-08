@@ -10,7 +10,7 @@ namespace DYLHS5_HFT_2021221.Client
             XYZDbContext dbContext= new XYZDbContext();
             Console.WriteLine("Client started successfully.");
 
-           
+
         }
     }
 }
