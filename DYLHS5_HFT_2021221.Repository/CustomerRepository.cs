@@ -8,14 +8,17 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Repository
 {
-    public abstract class CustomerRepository : Repository<Customer>, ICustomerRepository
+    public class CustomerRepository :  ICustomerRepository
     {
         XYZDbContext ctx;
-        public CustomerRepository(XYZDbContext ctx) : base(ctx)
+        public CustomerRepository(XYZDbContext ctx)
         {
             this.ctx = ctx;
         }
-
+        public IQueryable<Customer> GetAll()
+        {
+            return ctx.Set<Customer>();
+        }
         public void Create(Customer customer) //C
         {
             ctx.Customers.Add(customer);

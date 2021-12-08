@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using DYLHS5_HFT_2021221.Logic;
 using DYLHS5_HFT_2021221.Data;
 using DYLHS5_HFT_2021221.Repository;
+using Microsoft.EntityFrameworkCore;
 
 namespace DYLHS5_HFT_2021221.Endpoint
 {
@@ -30,16 +31,16 @@ namespace DYLHS5_HFT_2021221.Endpoint
             
 
             //Handling the dependency injections
-            services.AddTransient<IOrderLogic, OrderLogic>();
-            services.AddTransient<IOrderRepository, OrderRepository>();
+            services.AddScoped<IOrderLogic, OrderLogic>();
+            services.AddScoped<IOrderRepository, OrderRepository>();
 
-            services.AddTransient<ICustomerLogic, CustomerLogic>();
-            services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddScoped<ICustomerLogic, CustomerLogic>();
+            services.AddScoped<ICustomerRepository, CustomerRepository>();
 
-            services.AddTransient<IProductLogic, ProductLogic>();
-            services.AddTransient<IProductRepository, ProductRepository>();
+            services.AddScoped<IProductLogic, ProductLogic>();
+            services.AddScoped<IProductRepository, ProductRepository>();
 
-            services.AddTransient<XYZDbContext, XYZDbContext>();
+            services.AddScoped<XYZDbContext, XYZDbContext>();
 
             services.AddControllers();
         }

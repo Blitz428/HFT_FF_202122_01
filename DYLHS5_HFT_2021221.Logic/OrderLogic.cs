@@ -10,11 +10,15 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public class OrderLogic : IOrderLogic
     {
-        IOrderRepository repo;
+        private IOrderRepository repo;
 
         public OrderLogic(IOrderRepository repo)
         {
             this.repo = repo;
+        }
+        public IQueryable<Order> GetAll()
+        {
+            return repo.GetAll();
         }
 
         public void Create(Order order)

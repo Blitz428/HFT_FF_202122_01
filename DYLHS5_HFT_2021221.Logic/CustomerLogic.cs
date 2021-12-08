@@ -7,7 +7,7 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public class CustomerLogic : ICustomerLogic
     {
-        ICustomerRepository repo;
+        private ICustomerRepository repo;
 
         public CustomerLogic(ICustomerRepository repo)
         {
@@ -21,6 +21,11 @@ namespace DYLHS5_HFT_2021221.Logic
         public void Delete(int customerId)
         {
             repo.Delete(customerId);
+        }
+
+        public IQueryable<Customer> GetAll()
+        {
+            return repo.GetAll();
         }
 
         public IQueryable<Customer> ReadAll()

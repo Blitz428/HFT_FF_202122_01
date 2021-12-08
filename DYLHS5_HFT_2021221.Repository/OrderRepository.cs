@@ -8,14 +8,18 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Repository
 {
-    public abstract class OrderRepository : Repository<Order>, IOrderRepository
+    public class OrderRepository :  IOrderRepository
     {
         XYZDbContext ctx;
-        public OrderRepository(XYZDbContext ctx) : base(ctx)
+        public OrderRepository(XYZDbContext ctx)
         {
             this.ctx=ctx;
         }
-         
+        public IQueryable<Order> GetAll()
+        {
+            return ctx.Set<Order>();
+        }
+
 
         public void Create(Order order)
         {

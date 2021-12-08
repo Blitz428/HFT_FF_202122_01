@@ -10,10 +10,14 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public class ProductLogic : IProductLogic
     {
-        IProductRepository repo;
+        private IProductRepository repo;
         public ProductLogic(IProductRepository repo)
         {
             this.repo = repo;
+        }
+        public IQueryable<Product> GetAll()
+        {
+            return repo.GetAll();
         }
 
         public void Create(Product product)

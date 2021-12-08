@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Repository
 {
-    public abstract class ProductRepository : Repository<Product>, IProductRepository
+    public class ProductRepository : IProductRepository
     {
         XYZDbContext ctx;
-        public ProductRepository(XYZDbContext ctx) : base(ctx)
+        public ProductRepository(XYZDbContext ctx)
         {
             this.ctx = ctx;
         }
@@ -32,7 +32,10 @@ namespace DYLHS5_HFT_2021221.Repository
         {
             return ctx.Products;
         }
-
+        public IQueryable<Product> GetAll()
+        {
+            return ctx.Set<Product>();
+        }
         public void Update(Product product)
         {
             Product old = ReadOne(product.ProductId);

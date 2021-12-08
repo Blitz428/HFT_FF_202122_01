@@ -13,5 +13,6 @@ namespace DYLHS5_HFT_2021221.Logic
         IQueryable<Customer> ReadAll();
         void Update(Customer customer);
         void Delete(int customerId);
+        IQueryable<Customer> GetAll();
     }
 }

@@ -11,6 +11,7 @@ namespace DYLHS5_HFT_2021221.Logic
     {
         double HighestPrice();
 
+        IQueryable<Order> GetAll();
         void Create(Order order);
         IQueryable<Order> ReadAll();
         void Update(Order order);
