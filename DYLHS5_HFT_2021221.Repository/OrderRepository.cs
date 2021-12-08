@@ -10,10 +10,12 @@ namespace DYLHS5_HFT_2021221.Repository
 {
     public abstract class OrderRepository : Repository<Order>, IOrderRepository
     {
+        XYZDbContext ctx;
         public OrderRepository(XYZDbContext ctx) : base(ctx)
         {
+            this.ctx=ctx;
         }
-        protected XYZDbContext ctx;
+         
 
         public void Create(Order order)
         {

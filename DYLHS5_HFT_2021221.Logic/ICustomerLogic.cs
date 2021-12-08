@@ -9,9 +9,9 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public interface ICustomerLogic
     {
-        void Create(Customer brand);
+        void Create(Customer customer);
         IQueryable<Customer> ReadAll();
-        void Update(Customer brand);
-        void Delete(int brandId);
+        void Update(Customer customer);
+        void Delete(int customerId);
     }
 }

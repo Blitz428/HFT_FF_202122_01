@@ -16,15 +16,14 @@ namespace DYLHS5_HFT_2021221.Repository
             this.ctx = ctx;
         }
 
-        public void Create(Customer brand) //C
+        public void Create(Customer customer) //C
         {
-            ctx.Customers.Add(brand);
+            ctx.Customers.Add(customer);
             ctx.SaveChanges();
         }
 
         public void Delete(int customerId) //D
-        {
-            ctx.Customers.Remove(ReadOne(customerId));
+        {ctx.Customers.Remove(ReadOne(customerId));
             ctx.SaveChanges();
         }
 

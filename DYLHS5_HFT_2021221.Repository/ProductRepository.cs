@@ -10,10 +10,12 @@ namespace DYLHS5_HFT_2021221.Repository
 {
     public abstract class ProductRepository : Repository<Product>, IProductRepository
     {
+        XYZDbContext ctx;
         public ProductRepository(XYZDbContext ctx) : base(ctx)
         {
+            this.ctx = ctx;
         }
-        protected XYZDbContext ctx;
+       
 
         public void Create(Product product)
         {

@@ -13,14 +13,14 @@ namespace DYLHS5_HFT_2021221.Logic
         {
             this.repo = repo;
         }
-        public void Create(Customer brand)
+        public void Create(Customer customer)
         {
-            repo.Create(brand);
+            repo.Create(customer);
         }
 
-        public void Delete(int brandId)
+        public void Delete(int customerId)
         {
-            repo.Delete(brandId);
+            repo.Delete(customerId);
         }
 
         public IQueryable<Customer> ReadAll()
@@ -28,9 +28,9 @@ namespace DYLHS5_HFT_2021221.Logic
             return repo.ReadAll();
         }
 
-        public void Update(Customer brand)
+        public void Update(Customer customer)
         {
-            repo.Update(brand);
+            repo.Update(customer);
         }
 
 

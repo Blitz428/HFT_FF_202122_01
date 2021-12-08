@@ -9,7 +9,7 @@ namespace DYLHS5_HFT_2021221.Repository
 {
     public abstract class Repository<T>: IRepository<T> where T : class
     {
-        protected XYZDbContext ctx;
+        XYZDbContext ctx;
         public Repository(XYZDbContext ctx)
         {
             this.ctx = ctx;
