@@ -8,11 +8,11 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public class CustomerLogic : ICustomerLogic
     {
-        private ICustomerRepository repo;
+        private ICustomerRepository customerRepo;
 
-        public CustomerLogic(ICustomerRepository repo)
+        public CustomerLogic(ICustomerRepository customerRepo)
         {
-            this.repo = repo;
+            this.customerRepo = customerRepo;
         }
         public void Create(Customer customer)
         {
@@ -24,32 +24,32 @@ namespace DYLHS5_HFT_2021221.Logic
             {
                 throw new ProductOrCustomerNameMissingException("Missing cutomer name");
             }
-            repo.Create(customer);
+            customerRepo.Create(customer);
         }
 
-        public void Delete(int customerId)
+        public void Delete(int? customerId)
         {
-            repo.Delete(customerId);
+            customerRepo.Delete(customerId);
         }
 
         public IQueryable<Customer> GetAll()
         {
-            return repo.GetAll();
+            return customerRepo.GetAll();
         }
 
-        public Customer GetOne(int customerId)
+        public Customer GetOne(int? customerId)
         {
-            return repo.ReadOne(customerId);
+            return customerRepo.ReadOne(customerId);
         }
 
         public IQueryable<Customer> ReadAll()
         {
-            return repo.ReadAll();
+            return customerRepo.ReadAll();
         }
 
         public void Update(Customer customer)
         {
-            repo.Update(customer);
+            customerRepo.Update(customer);
         }
 
 

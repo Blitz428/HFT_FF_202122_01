@@ -11,14 +11,14 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public class ProductLogic : IProductLogic
     {
-        private IProductRepository repo;
+        private IProductRepository productRepo;
         public ProductLogic(IProductRepository repo)
         {
-            this.repo = repo;
+            this.productRepo = repo;
         }
         public IQueryable<Product> GetAll()
         {
-            return repo.GetAll();
+            return productRepo.GetAll();
         }
 
         public void Create(Product product)
@@ -31,27 +31,32 @@ namespace DYLHS5_HFT_2021221.Logic
             {
                 throw new IdMissingException("Missing product ID");
             }
-            repo.Create(product);
+            productRepo.Create(product);
         }
 
-        public void Delete(int productId)
+        public void Delete(int? productId)
         {
-            repo.Delete(productId);
+            productRepo.Delete(productId);
         }
 
         public IQueryable<Product> ReadAll()
         {
-            return repo.ReadAll();
+            return productRepo.ReadAll();
         }
 
         public void Update(Product product)
         {
-            repo.Update(product);
+            productRepo.Update(product);
         }
 
-        public Product GetOne(int productId)
+        public Product GetOne(int? productId)
         {
-            return repo.ReadOne(productId);
+            return productRepo.ReadOne(productId);
+        }
+
+        public IEnumerable<Product> ProductsWithThisCustomer(string customerName)
+        {
+            throw new NotImplementedException();
         }
     }
 }

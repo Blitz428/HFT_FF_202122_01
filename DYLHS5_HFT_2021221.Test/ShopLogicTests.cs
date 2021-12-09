@@ -6,18 +6,30 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Test
 {
     [TestFixture]
-    class OrderLogicTests
+    public class ShopLogicTests
     {
-        IOrderLogic logic;
+        private ShopLogic ShopLogic { get; set; }
 
+        private Mock<IProductRepository> ProductRepositoryMock { get; set; }
+        private Mock<ICustomerRepository> CustomersRepositoryMock { get; set;}
+        private Mock<IOrderRepository> OrderRepositoryMock { get; set; }
+
+        
+        
+        
         [SetUp]
         public void Setup()
         {
-            Mock<IOrderRepository> mockedRepo = new Mock<IOrderRepository>();
+            this.CustomersRepositoryMock= new Mock<ICustomerRepository>();
+            this.ProductRepositoryMock = new Mock<IProductRepository>();
+            this.OrderRepositoryMock = new Mock<IOrderRepository>();
+
 
             //PRODUCTS
             Product dorko1 = new Product() { ProductId = 1, ProductName = "BOUNCE", Color = "BROWN", Size = 41, Price = 24999 };
@@ -76,65 +88,57 @@ namespace DYLHS5_HFT_2021221.Test
             customer5.Orders.Add(order9);
             customer5.Orders.Add(order10);
 
-            mockedRepo.Setup(x => x.ReadAll())
+            ProductRepositoryMock.Setup(x => x.ReadAll())
+                .Returns(new List<Product>()
+                {dorko1,dorko2,adidas1,adidas2,nike1,nike2,converse1,converse2,vans1,vans2}.AsQueryable());
+            OrderRepositoryMock.Setup(x => x.ReadAll())
                 .Returns(new List<Order>()
                 {order1,order2,order3,order4,order5,order6,order7,order8,order9,order10}.AsQueryable());
+            CustomersRepositoryMock.Setup(x=> x.ReadAll())
+                .Returns(new List<Customer>(){ customer1,customer2,customer3,customer4,customer5}.AsQueryable());
 
-            logic = new OrderLogic(mockedRepo.Object);
+
+            this.ShopLogic = new ShopLogic(this.CustomersRepositoryMock.Object, this.OrderRepositoryMock.Object, this.ProductRepositoryMock.Object);
 
         }
 
-        [Test] //Create Exception #1
-        public void CreateOrderMissingProductNameTest()
+        [Test]
+        public void GetOrdersByCustomerNameTest() //gives back the orders of the specified customer
         {
-            Product dorko3 = new Product() { Color = "GREEN", Size = 42, Price = 20099 };
-            Customer customer6 = new Customer() { CustomerName = "F.Ferenc", PhoneNumber = 06701234572, Address = "Randomcím3" };
-
-            var createdOrder = new Order()
+            Customer customer1 = new Customer() { CustomerId = 1, CustomerName = "A.Aladár", Address = "Randomcím1", PhoneNumber = 06701234567 };
+            Product dorko1 = new Product() { ProductId = 1, ProductName = "BOUNCE", Color = "BROWN", Size = 41, Price = 24999 };
+            Product adidas1 = new Product() { ProductId = 3, ProductName = "ORIGINALS CONTINENTAL 80 STRIPES", Color = "BLACK", Size = 42, Price = 29999 };
+            IEnumerable<Order> test= new List<Order>() 
             {
-                Product = dorko3,
-                Customer = customer6,
-                IsPrePaid = true,
-                IsTransportRequired = true
-            };
 
-            Assert.Throws<ProductOrCustomerNameMissingException>(() => logic.Create(createdOrder));
+             new Order() { OrderId = 1, ProductId = 1, CustomerId = 1, IsPrePaid = true, IsTransportRequired = false, Product = dorko1, Customer = customer1 },
+             new Order() { OrderId = 3, ProductId = 3, CustomerId = 1, IsPrePaid = true, IsTransportRequired = false, Product = adidas1, Customer = customer1 }
+
+        };
+
+            Assert.AreEqual(test.Count(), ShopLogic.GetOrdersByCustomername("A.Aladár").Count()); //there are two orders with this customer name
+
         }
-
-        [Test] //Create Exception #2
-        public void CreateOrderMissingCustomerTest()
+        [Test]
+        public void GetAddressesOfOrdersTest()
         {
-            Product dorko3 = new Product() { ProductName = "TEST", Color = "GREEN", Size = 42, Price = 20099 };
-            var createdOrder = new Order()
-            {
-                Product = dorko3,
-                IsPrePaid = true,
-                IsTransportRequired = true
-            };
+            Assert.AreEqual(4,ShopLogic.GetAddressesOfOrders().Count()); //there are four orders in mock repo which have customer with an address
 
-            Assert.Throws<NullReferenceException>(() => logic.Create(createdOrder));
+
         }
 
-        [Test] //Create Exception #3
-        public void CreateBooleanExpressionMissingTest()
+        [Test]
+        public void GetProductsWeNeedToTransportTest()
         {
-            Product dorko3 = new Product() { ProductName = "TEST", Color = "GREEN", Size = 42, Price = 20099 };
-            Customer customer6 = new Customer() { CustomerName = "F.Ferenc", PhoneNumber = 06701234572, Address = "Randomcím3" };
-            var createdOrder = new Order()
-            {
-                Product = dorko3,
-                Customer = customer6,
-
-            };
-
-            Assert.Throws<BooleanExpressionsAreNullException>(() => logic.Create(createdOrder));
+            Assert.AreEqual(ShopLogic.GetProductsWeNeedToTransport().Count(), 5); //there are four orders in mock repo where wee need to transport
 
         }
-
-        
-
-        
-
 
     }
+
+
+
+
+
 }
+

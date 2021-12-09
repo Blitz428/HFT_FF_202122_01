@@ -23,7 +23,7 @@ namespace DYLHS5_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
-        public Product ReadOne(int productId)
+        public Product ReadOne(int? productId)
         {
             return ctx.Products.FirstOrDefault(x => x.ProductId == productId);
         }
@@ -53,7 +53,7 @@ namespace DYLHS5_HFT_2021221.Repository
             
         }
 
-        public void Delete(int productId)
+        public void Delete(int? productId)
         {
             ctx.Products.Remove(ReadOne(productId));
             ctx.SaveChanges();

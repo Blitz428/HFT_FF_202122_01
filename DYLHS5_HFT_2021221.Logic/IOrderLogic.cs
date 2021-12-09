@@ -9,19 +9,12 @@ namespace DYLHS5_HFT_2021221.Logic
 {
     public interface IOrderLogic
     {
-        double HighestPrice();
-
         IQueryable<Order> GetAll();
         void Create(Order order);
         IQueryable<Order> ReadAll();
         void Update(Order order);
-        void Delete(int orderId);
-        Order GetOne (int orderId);
-        
-        IEnumerable<Order> OrderFindByColor(string color);
-        IEnumerable<string> CustomerFindByPrePaidOrder();
-        IEnumerable<string> CustomersWhoNeedTransport();
-        IEnumerable<Customer> CustomersBiggerThanThisShoeSize(int size);
+        void Delete(int? orderId);
+        Order GetOne (int? orderId); 
 
     }
 }

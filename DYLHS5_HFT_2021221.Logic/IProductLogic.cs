@@ -12,8 +12,10 @@ namespace DYLHS5_HFT_2021221.Logic
         void Create(Product product);
         IQueryable<Product> ReadAll();
         void Update(Product product);
-        void Delete(int productId);
+        void Delete(int? productId);
         IQueryable<Product> GetAll();
-        Product GetOne(int productId);
+        Product GetOne(int? productId);
+
+        IEnumerable<Product> ProductsWithThisCustomer(string customerName);
     }
 }

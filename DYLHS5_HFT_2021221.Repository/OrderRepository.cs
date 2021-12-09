@@ -27,7 +27,7 @@ namespace DYLHS5_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
-        public Order ReadOne(int orderId)
+        public Order ReadOne(int? orderId)
         {
             return ctx.Orders.FirstOrDefault(x=>x.OrderId==orderId);
         }
@@ -55,7 +55,7 @@ namespace DYLHS5_HFT_2021221.Repository
             
         }
 
-        public void Delete(int orderId)
+        public void Delete(int? orderId)
         {
             ctx.Orders.Remove(ReadOne(orderId));
             ctx.SaveChanges();

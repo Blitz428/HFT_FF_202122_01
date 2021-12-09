@@ -31,6 +31,9 @@ namespace DYLHS5_HFT_2021221.Models
         [NotMapped]
         [JsonIgnore]
         public virtual ICollection<Order> Orders {  get; set;}
-
+        public Product()
+        {
+            Orders=new List<Order>();
+        }
     }
 }

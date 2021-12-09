@@ -25,7 +25,7 @@ namespace DYLHS5_HFT_2021221.Repository
             ctx.SaveChanges();
         }
 
-        public void Delete(int customerId) //D
+        public void Delete(int? customerId) //D
         {ctx.Customers.Remove(ReadOne(customerId));
             ctx.SaveChanges();
         }
@@ -35,7 +35,7 @@ namespace DYLHS5_HFT_2021221.Repository
             return ctx.Customers;
         }
 
-        public Customer ReadOne(int customerId) //R2
+        public Customer ReadOne(int? customerId) //R2
         {
             return ctx.Customers.FirstOrDefault(x => x.CustomerId == customerId);
         }

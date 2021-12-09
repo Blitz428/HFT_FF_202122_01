@@ -45,16 +45,38 @@ namespace DYLHS5_HFT_2021221.Test
             Customer customer5 = new Customer() { CustomerId = 5, CustomerName = "E.Elvira", PhoneNumber = 06701234571 };
 
             //ORDERS
-            Order order1 = new Order() { OrderId = 1, ProductId = dorko1.ProductId, CustomerId = customer1.CustomerId, IsPrePaid = true, IsTransportRequired = false };
-            Order order2 = new Order() { OrderId = 2, ProductId = dorko2.ProductId, CustomerId = customer2.CustomerId, IsPrePaid = false, IsTransportRequired = true };
-            Order order3 = new Order() { OrderId = 3, ProductId = adidas1.ProductId, CustomerId = customer1.CustomerId, IsPrePaid = true, IsTransportRequired = false };
-            Order order4 = new Order() { OrderId = 4, ProductId = adidas2.ProductId, CustomerId = customer2.CustomerId, IsPrePaid = true, IsTransportRequired = true };
-            Order order5 = new Order() { OrderId = 5, ProductId = nike1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false };
-            Order order6 = new Order() { OrderId = 6, ProductId = nike2.ProductId, CustomerId = customer4.CustomerId, IsPrePaid = true, IsTransportRequired = false };
-            Order order7 = new Order() { OrderId = 7, ProductId = converse1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false };
-            Order order8 = new Order() { OrderId = 8, ProductId = converse2.ProductId, CustomerId = customer4.CustomerId, IsPrePaid = true, IsTransportRequired = true };
-            Order order9 = new Order() { OrderId = 9, ProductId = vans1.ProductId, CustomerId = customer5.CustomerId, IsPrePaid = true, IsTransportRequired = true };
-            Order order10 = new Order() { OrderId = 10, ProductId = vans2.ProductId, CustomerId = customer5.CustomerId, IsPrePaid = true, IsTransportRequired = true };
+            Order order1 = new Order() { OrderId = 1, ProductId = dorko1.ProductId, CustomerId = customer1.CustomerId, IsPrePaid = true, IsTransportRequired = false, Product = dorko1, Customer = customer1 };
+            Order order2 = new Order() { OrderId = 2, ProductId = dorko2.ProductId, CustomerId = customer2.CustomerId, IsPrePaid = false, IsTransportRequired = true, Product = dorko2, Customer = customer2 };
+            Order order3 = new Order() { OrderId = 3, ProductId = adidas1.ProductId, CustomerId = customer1.CustomerId, IsPrePaid = true, IsTransportRequired = false, Product = adidas1, Customer = customer1 };
+            Order order4 = new Order() { OrderId = 4, ProductId = adidas2.ProductId, CustomerId = customer2.CustomerId, IsPrePaid = true, IsTransportRequired = true, Product = adidas2, Customer = customer2 };
+            Order order5 = new Order() { OrderId = 5, ProductId = nike1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false, Product = nike1, Customer = customer3 };
+            Order order6 = new Order() { OrderId = 6, ProductId = nike2.ProductId, CustomerId = customer4.CustomerId, IsPrePaid = true, IsTransportRequired = false, Product = nike2, Customer = customer4 };
+            Order order7 = new Order() { OrderId = 7, ProductId = converse1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false, Product = converse1, Customer = customer3 };
+            Order order8 = new Order() { OrderId = 8, ProductId = converse2.ProductId, CustomerId = customer4.CustomerId, IsPrePaid = true, IsTransportRequired = true, Product = converse2, Customer = customer4 };
+            Order order9 = new Order() { OrderId = 9, ProductId = vans1.ProductId, CustomerId = customer5.CustomerId, IsPrePaid = true, IsTransportRequired = true, Product = vans1, Customer = customer5 };
+            Order order10 = new Order() { OrderId = 10, ProductId = vans2.ProductId, CustomerId = customer5.CustomerId, IsPrePaid = true, IsTransportRequired = true, Product = vans2, Customer = customer5 };
+
+            dorko1.Orders.Add(order1);
+            dorko2.Orders.Add(order2);
+            adidas1.Orders.Add(order3);
+            adidas2.Orders.Add(order4);
+            nike1.Orders.Add(order5);
+            nike2.Orders.Add(order6);
+            converse1.Orders.Add(order7);
+            converse2.Orders.Add(order8);
+            vans1.Orders.Add(order9);
+            vans2.Orders.Add(order10);
+
+            customer1.Orders.Add(order1);
+            customer1.Orders.Add(order3);
+            customer2.Orders.Add(order2);
+            customer2.Orders.Add(order4);
+            customer3.Orders.Add(order5);
+            customer3.Orders.Add(order7);
+            customer4.Orders.Add(order6);
+            customer4.Orders.Add(order8);
+            customer5.Orders.Add(order9);
+            customer5.Orders.Add(order10);
 
             mockedRepo.Setup(x => x.ReadAll())
                 .Returns(new List<Customer>()
