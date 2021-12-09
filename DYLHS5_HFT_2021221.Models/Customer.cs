@@ -26,7 +26,7 @@ namespace DYLHS5_HFT_2021221.Models
         public virtual ICollection<Order> Orders { get; set; }
         public Customer()
         {
-            Orders= new List<Order>();
+            Orders = new List<Order>();
         }
     }
 }

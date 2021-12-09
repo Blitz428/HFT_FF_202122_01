@@ -23,11 +23,11 @@ namespace DYLHS5_HFT_2021221.Logic
 
         public void Create(Product product)
         {
-            if (product.ProductName==null)
+            if (product.ProductName == null)
             {
                 throw new ProductOrCustomerNameMissingException("Product name missing!");
             }
-            if (product.ProductId==null)
+            if (product.ProductId == null)
             {
                 throw new IdMissingException("Missing product ID");
             }

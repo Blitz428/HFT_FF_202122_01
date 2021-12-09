@@ -18,7 +18,7 @@ namespace DYLHS5_HFT_2021221.Endpoint.Controllers
 
         }
         [HttpGet("order-customer/{customername}")] // /shop/order-customer
-        public IEnumerable<Order> GetOrdersByCustomername([FromRoute]string customername)
+        public IEnumerable<Order> GetOrdersByCustomername([FromRoute] string customername)
         {
             return logic.GetOrdersByCustomername(customername);
         }
@@ -34,7 +34,7 @@ namespace DYLHS5_HFT_2021221.Endpoint.Controllers
         }
 
         [HttpGet("customer-size/{size}")]  // /shop/customer-size/
-        public IEnumerable<Customer> GetCustomersWithThisSize([FromRoute]int size)
+        public IEnumerable<Customer> GetCustomersWithThisSize([FromRoute] int size)
         {
             return logic.GetCustomersWithThisSize(size);
         }

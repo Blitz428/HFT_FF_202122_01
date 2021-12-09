@@ -16,7 +16,7 @@ namespace DYLHS5_HFT_2021221.Logic
         }
         public void Create(Customer customer)
         {
-            if (customer.CustomerName==null)
+            if (customer.CustomerName == null)
             {
                 throw new ProductOrCustomerNameMissingException("Missing cutomer name");
             }
@@ -47,11 +47,6 @@ namespace DYLHS5_HFT_2021221.Logic
         {
             customerRepo.Update(customer);
         }
-
-
-
-        
-
 
     }
 }

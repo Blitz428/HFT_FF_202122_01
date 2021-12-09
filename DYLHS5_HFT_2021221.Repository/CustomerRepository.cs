@@ -44,10 +44,8 @@ namespace DYLHS5_HFT_2021221.Repository
         {
             Customer old = ReadOne(customer.CustomerId);
 
-            old.CustomerId=customer.CustomerId;
             old.CustomerName=customer.CustomerName;
             old.Address=customer.Address;
-            old.Orders=customer.Orders;
             old.PhoneNumber=customer.PhoneNumber;
 
             ctx.SaveChanges();

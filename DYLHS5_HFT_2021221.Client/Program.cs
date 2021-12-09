@@ -19,7 +19,10 @@ namespace DYLHS5_HFT_2021221.Client
             Order order = new Order();
             Product product = new Product();
             Customer customer = new Customer();
+
             Console.WriteLine("Client started successfully.");
+
+            //API CALL MENU
             var menu = new ConsoleMenu()
 
                 //READALL
@@ -54,12 +57,12 @@ namespace DYLHS5_HFT_2021221.Client
                 .Add("Back", ConsoleMenu.Close).Show())
 
                 //READ
-                .Add("Get one...", ()=>new ConsoleMenu()
+                .Add("Get one...", () => new ConsoleMenu()
                 .Add("Order", () =>
                 {
                     Console.WriteLine("Enter an id!");
                     int id = int.Parse(Console.ReadLine());
-                    order = restService.GetSingle<Order>("/order/"+id);
+                    order = restService.GetSingle<Order>("/order/" + id);
                     Console.WriteLine("Order Id: " + order.OrderId + "\t Order time: " + order.OrderTime + "\t Prepaid: " + order.IsPrePaid + "\t Transport needed: " + order.IsTransportRequired);
                     Console.ReadLine();
                 })
@@ -82,70 +85,70 @@ namespace DYLHS5_HFT_2021221.Client
                 .Add("Back", ConsoleMenu.Close).Show())
 
                 //CREATE
-                .Add("Create new...",()=>new ConsoleMenu()
-                .Add("Order", () => 
-                {
-                    Console.WriteLine("Is the order prepaid? y/n");
-                    bool prepaid;
-                    if (Console.ReadLine().Equals('y'))
-                    {
-                        prepaid = true;
-                    }
-                    else
-                    {
-                        prepaid = false;
-                    }
+                .Add("Create new...", () => new ConsoleMenu()
+                 .Add("Order", () =>
+                 {
+                     Console.WriteLine("Is the order prepaid? y/n");
+                     bool prepaid;
+                     if (Console.ReadLine().Equals('y'))
+                     {
+                         prepaid = true;
+                     }
+                     else
+                     {
+                         prepaid = false;
+                     }
 
-                    Console.WriteLine("Does the order require transport? y/n");
-                    bool isTransportRequired;
-                    if (Console.ReadLine().Equals('y'))
-                    {
-                        isTransportRequired = true;
-                    }
-                    else
-                    {
-                        isTransportRequired = false;
-                    }
-                    restService.Post<Order>(new Order { IsPrePaid = prepaid, IsTransportRequired = isTransportRequired, }, "/order");
-                    Console.WriteLine("Order added!");
-                    Console.ReadLine();
-                })
-                .Add("Product", () => 
-                {
-                    Console.WriteLine("Add product name!");
-                    string name= Console.ReadLine();
-                    Console.WriteLine("Add product color!");
-                    string color = Console.ReadLine();
-                    Console.WriteLine("Add product size!");
-                    int size = int.Parse(Console.ReadLine());
-                    Console.WriteLine("Add product price!");
-                    double price=double.Parse(Console.ReadLine());
+                     Console.WriteLine("Does the order require transport? y/n");
+                     bool isTransportRequired;
+                     if (Console.ReadLine().Equals('y'))
+                     {
+                         isTransportRequired = true;
+                     }
+                     else
+                     {
+                         isTransportRequired = false;
+                     }
+                     restService.Post<Order>(new Order { IsPrePaid = prepaid, IsTransportRequired = isTransportRequired }, "/order");
+                     Console.WriteLine("Order added!");
+                     Console.ReadLine();
+                 })
+                 .Add("Product", () =>
+                 {
+                     Console.WriteLine("Add product name!");
+                     string name = Console.ReadLine();
+                     Console.WriteLine("Add product color!");
+                     string color = Console.ReadLine();
+                     Console.WriteLine("Add product size!");
+                     int size = int.Parse(Console.ReadLine());
+                     Console.WriteLine("Add product price!");
+                     double price = double.Parse(Console.ReadLine());
 
-                    restService.Post<Product>(new Product { ProductName = name, Color = color, Price = price, Size = size }, "/product");
-                    Console.WriteLine("Product added!");
-                    Console.ReadLine();
-                })
-                .Add("Customer", () => 
-                {
-                    Console.WriteLine("Add customer name!");
-                    string name = Console.ReadLine();
-                    Console.WriteLine("Add customer phone number!");
-                    long number = long.Parse(Console.ReadLine());
-                    Console.WriteLine("Add customer address!");
-                    string address = Console.ReadLine();
+                     restService.Post<Product>(new Product { ProductName = name, Color = color, Price = price, Size = size }, "/product");
+                     Console.WriteLine("Product added!");
+                     Console.ReadLine();
+                 })
+                 .Add("Customer", () =>
+                 {
+                     Console.WriteLine("Add customer name!");
+                     string name = Console.ReadLine();
+                     Console.WriteLine("Add customer phone number!");
+                     long number = long.Parse(Console.ReadLine());
+                     Console.WriteLine("Add customer address!");
+                     string address = Console.ReadLine();
 
-                    restService.Post<Customer>(new Customer { Address = address, CustomerName = name, PhoneNumber = number }, "/customer");
-                    Console.WriteLine("Customer added!");
-                    Console.ReadLine();
+                     restService.Post<Customer>(new Customer { Address = address, CustomerName = name, PhoneNumber = number }, "/customer");
+                     Console.WriteLine("Customer added!");
+                     Console.ReadLine();
 
-                })
-                .Add("Back", ConsoleMenu.Close).Show())
+                 })
+                 .Add("Back", ConsoleMenu.Close).Show())
 
                  //UPDATE
                  .Add("Update...", () => new ConsoleMenu()
-                 .Add("Order", () => 
+                 .Add("Order", () =>
                  {
-                     Console.WriteLine("Which order do you want to update?");
+                     Console.WriteLine("Which order do you want to update? /ID/ ");
                      int id = int.Parse(Console.ReadLine());
 
                      Console.WriteLine("Is the order prepaid? y/n");
@@ -169,12 +172,14 @@ namespace DYLHS5_HFT_2021221.Client
                      {
                          isTransportRequired = false;
                      }
-                     restService.Put<Order>(new Order {OrderId=id,IsPrePaid = prepaid, IsTransportRequired = isTransportRequired, }, "/order");
+                     restService.Put<Order>(new Order { OrderId = id, IsPrePaid = prepaid, IsTransportRequired = isTransportRequired, }, "/order");
                      Console.WriteLine("Order updated!");
                      Console.ReadLine();
-                 })
+                 }) //Id: 1-10
                  .Add("Product", () =>
                  {
+                     Console.WriteLine("Which product do you want to upgrade?  /ID/ ");
+                     int id = int.Parse(Console.ReadLine());
                      Console.WriteLine("Add product name!");
                      string name = Console.ReadLine();
                      Console.WriteLine("Add product color!");
@@ -188,9 +193,11 @@ namespace DYLHS5_HFT_2021221.Client
                      Console.WriteLine("Product updated!");
                      Console.ReadLine();
 
-                 })
+                 }) //Id:1-10
                  .Add("Customer", () =>
                  {
+                     Console.WriteLine("Which customer do you want to update?");
+                     int id = int.Parse(Console.ReadLine());
                      Console.WriteLine("Add customer name!");
                      string name = Console.ReadLine();
                      Console.WriteLine("Add customer phone number!");
@@ -198,11 +205,11 @@ namespace DYLHS5_HFT_2021221.Client
                      Console.WriteLine("Add customer address!");
                      string address = Console.ReadLine();
 
-                     restService.Put<Customer>(new Customer { Address = address, CustomerName = name, PhoneNumber = number }, "/customer");
+                     restService.Put<Customer>(new Customer { CustomerId = id, Address = address, CustomerName = name, PhoneNumber = number }, "/customer");
                      Console.WriteLine("Customer updated!");
                      Console.ReadLine();
 
-                 })
+                 }) //Id: 1-5
                  .Add("Back", ConsoleMenu.Close).Show())
 
                  //DELETE
@@ -210,10 +217,10 @@ namespace DYLHS5_HFT_2021221.Client
                  .Add("Order", () =>
                  {
                      Console.WriteLine("Please enter the order's Id");
-                     int id =int.Parse(Console.ReadLine());
-                     foreach(Order order in restService.Get<Order>("/order"))
+                     int id = int.Parse(Console.ReadLine());
+                     foreach (Order order in restService.Get<Order>("/order"))
                      {
-                         if (id==order.OrderId)
+                         if (id == order.OrderId)
                          {
                              restService.Delete(id, "/order");
                          }
@@ -222,7 +229,7 @@ namespace DYLHS5_HFT_2021221.Client
                      }
                      Console.WriteLine("Order deleted!");
                      Console.ReadLine();
-                 })
+                 }) //Id: 1-10
                  .Add("Product", () =>
                  {
                      Console.WriteLine("Please enter the product's Id");
@@ -238,7 +245,7 @@ namespace DYLHS5_HFT_2021221.Client
                      }
                      Console.WriteLine("Product deleted!");
                      Console.ReadLine();
-                 })
+                 }) //Id:1-10
                  .Add("Customer", () =>
                  {
                      Console.WriteLine("Please enter the customer's Id");
@@ -254,7 +261,7 @@ namespace DYLHS5_HFT_2021221.Client
                      }
                      Console.WriteLine("Customer deleted!");
                      Console.ReadLine();
-                 })
+                 }) //Id: 1-5
                  .Add("Back", ConsoleMenu.Close).Show())
 
                  //NON-CRUDS
@@ -264,20 +271,20 @@ namespace DYLHS5_HFT_2021221.Client
                      Console.WriteLine("Please enter the customer's name");
                      string customername = Console.ReadLine();
                      Console.WriteLine();
-                     orders = restService.Get<Order>("/shop/order-customer/"+customername);
+                     orders = restService.Get<Order>("/shop/order-customer/" + customername);
                      foreach (Order order in orders)
                      {
                          Console.WriteLine("Order Id: " + order.OrderId + "\t Order time: " + order.OrderTime + "\t Prepaid: " + order.IsPrePaid + "\t Transport needed: " + order.IsTransportRequired);
                      }
                      Console.ReadLine();
-                 
-                    
+
+
                  }) //TESTED WITH: A.Aladár
                  .Add("GetAddressesOfOrders", () =>
                  {
                      IEnumerable<KeyValuePair<Order, string>> keyValuePairs = restService.Get<KeyValuePair<Order, string>>("/shop/address-order");
 
-                     foreach(KeyValuePair<Order,string> keyValuePair in keyValuePairs)
+                     foreach (KeyValuePair<Order, string> keyValuePair in keyValuePairs)
                      {
 
                          Console.WriteLine("\t Order id: " + keyValuePair.Key.OrderId + "\t Address: " + keyValuePair.Value);
@@ -301,9 +308,9 @@ namespace DYLHS5_HFT_2021221.Client
                      Console.WriteLine("What is the size?");
                      int size = int.Parse(Console.ReadLine());
                      customers = restService.Get<Customer>("/shop/customer-size/" + size);
-                     foreach(Customer customer in customers)
+                     foreach (Customer customer in customers)
                      {
-                        Console.WriteLine("Id: " + customer.CustomerId + "\t Name: " + customer.CustomerName + "\t Phone: " + customer.PhoneNumber + "\t Address: " + customer.Address);
+                         Console.WriteLine("Id: " + customer.CustomerId + "\t Name: " + customer.CustomerName + "\t Phone: " + customer.PhoneNumber + "\t Address: " + customer.Address);
                      }
                      Console.ReadLine();
                  }) //TESTED WITH :42
@@ -317,17 +324,13 @@ namespace DYLHS5_HFT_2021221.Client
                      }
                      Console.ReadLine();
                  })
-                  
+
 
                  .Add("Back", ConsoleMenu.Close).Show())
-
-
-
                  .Add("EXIT", ConsoleMenu.Close);
 
-
             menu.Show();
-        } 
-        
+        }
+
     }
 }

@@ -103,19 +103,19 @@ namespace DYLHS5_HFT_2021221.Test
 
         }
 
-        
+
         [Test]
         public void GetOneOrderTest()
         {
             logic.GetOne(1);
-            mockedRepo.Verify(x=>x.ReadOne(1),Times.Once);
+            mockedRepo.Verify(x => x.ReadOne(1), Times.Once);
         }
         [Test]
         public void GetOneOrderTest2()
         {
-            
-            
-            Assert.Throws<MockException>(()=>mockedRepo.Verify(x => x.ReadOne(12), Times.Once));
+
+
+            Assert.Throws<MockException>(() => mockedRepo.Verify(x => x.ReadOne(12), Times.Once));
         }
 
 

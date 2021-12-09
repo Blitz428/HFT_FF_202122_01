@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Repository
 {
-    public class OrderRepository :  IOrderRepository
+    public class OrderRepository : IOrderRepository
     {
         XYZDbContext ctx;
         public OrderRepository(XYZDbContext ctx)
         {
-            this.ctx=ctx;
+            this.ctx = ctx;
         }
         public IQueryable<Order> GetAll()
         {
@@ -29,7 +29,7 @@ namespace DYLHS5_HFT_2021221.Repository
 
         public Order ReadOne(int? orderId)
         {
-            return ctx.Orders.FirstOrDefault(x=>x.OrderId==orderId);
+            return ctx.Orders.FirstOrDefault(x => x.OrderId == orderId);
         }
 
         public IQueryable<Order> ReadAll()
@@ -41,18 +41,13 @@ namespace DYLHS5_HFT_2021221.Repository
         {
             Order old = ReadOne(order.OrderId);
 
-            old.Product = order.Product;
-            old.Customer=order.Customer;
-            old.OrderId=order.OrderId;
-            old.IsPrePaid=order.IsPrePaid;
-            old.IsTransportRequired=order.IsTransportRequired;
-            old.CustomerId=order.CustomerId;
-            old.ProductId=order.ProductId;
-            
-            
+
+            old.IsPrePaid = order.IsPrePaid;
+            old.IsTransportRequired = order.IsTransportRequired;
+
 
             ctx.SaveChanges();
-            
+
         }
 
         public void Delete(int? orderId)

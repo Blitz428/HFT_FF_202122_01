@@ -8,37 +8,37 @@ using System.Threading.Tasks;
 
 namespace DYLHS5_HFT_2021221.Logic
 {
-    public class ShopLogic :IShopLogic
+    public class ShopLogic : IShopLogic
     {
         private IOrderRepository orderRepo;
         private IProductRepository productRepo;
         private ICustomerRepository customerRepo;
 
-        public ShopLogic(ICustomerRepository customerRepo,IOrderRepository orderRepo, IProductRepository productRepo)
+        public ShopLogic(ICustomerRepository customerRepo, IOrderRepository orderRepo, IProductRepository productRepo)
         {
             this.productRepo = productRepo;
             this.orderRepo = orderRepo;
             this.customerRepo = customerRepo;
         }
 
-        public IEnumerable<Order>GetOrdersByCustomername(string customername) //gives back the orders of the specified customer
+        public IEnumerable<Order> GetOrdersByCustomername(string customername) //gives back the orders of the specified customer
         {
 
-            return  from order in orderRepo.ReadAll()
-                    join customer in customerRepo.ReadAll()
-                    on order.CustomerId equals customer.CustomerId
-                    where customer.CustomerName == customername
-                    select order;
+            return from order in orderRepo.ReadAll()
+                   join customer in customerRepo.ReadAll()
+                   on order.CustomerId equals customer.CustomerId
+                   where customer.CustomerName == customername
+                   select order;
 
 
-           
+
         }
-        public IEnumerable<KeyValuePair<Order,string>>GetAddressesOfOrders()
+        public IEnumerable<KeyValuePair<Order, string>> GetAddressesOfOrders()
         {
             return from order in orderRepo.ReadAll()
                    join customer in customerRepo.ReadAll()
                    on order.CustomerId equals customer.CustomerId
-                   where customer.Address !=null
+                   where customer.Address != null
                    select new KeyValuePair<Order, string>(order, customer.Address);
 
         }
@@ -48,7 +48,7 @@ namespace DYLHS5_HFT_2021221.Logic
             return from product in productRepo.ReadAll()
                    join order in orderRepo.ReadAll()
                    on product.ProductId equals order.ProductId
-                   where order.IsTransportRequired==true
+                   where order.IsTransportRequired == true
                    select product;
         }
 
@@ -61,7 +61,7 @@ namespace DYLHS5_HFT_2021221.Logic
                    on order.ProductId equals product.ProductId
                    where product.Size == size
                    select customer;
-            
+
         }
 
         public IEnumerable<KeyValuePair<Customer, Order>> GetPrePaidOrdersByCustomers()
@@ -69,7 +69,7 @@ namespace DYLHS5_HFT_2021221.Logic
             return from customer in customerRepo.ReadAll()
                    join order in orderRepo.ReadAll()
                    on customer.CustomerId equals order.CustomerId
-                   where order.IsPrePaid==true
+                   where order.IsPrePaid == true
                    select new KeyValuePair<Customer, Order>(customer, order);
 
 
@@ -77,7 +77,7 @@ namespace DYLHS5_HFT_2021221.Logic
         }
 
 
-        
+
 
     }
 }

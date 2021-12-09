@@ -98,7 +98,7 @@ namespace DYLHS5_HFT_2021221.Test
         [Test]
         public void TestCreateAndRemoveCustomer()
         {
-            Customer customer = new Customer() { CustomerId=6,CustomerName = "asd", PhoneNumber = 06701234572, Address = "Randomcím3" };
+            Customer customer = new Customer() { CustomerId = 6, CustomerName = "asd", PhoneNumber = 06701234572, Address = "Randomcím3" };
             logic.Create(customer);
             mockedRepo.Verify(x => x.Create(customer), Times.Once());
             logic.Delete(6);

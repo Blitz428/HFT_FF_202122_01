@@ -14,7 +14,7 @@ namespace DYLHS5_HFT_2021221.Client
         private const string Selected = "\n:: Selected Item ::\n";
         private const string Other = "Try an other ID:";
         private const string Saved = "Saved!";
-        
+
 
         public static void ListAllC(CustomerLogic customerLogic)
         {
@@ -48,7 +48,7 @@ namespace DYLHS5_HFT_2021221.Client
             int id = int.Parse(Enter.ToString());
 
             Console.WriteLine(customerLogic?.GetOne(id).ToString());
-            
+
             Console.ReadLine();
         }
         public static void GetOne(OrderLogic orderLogic)

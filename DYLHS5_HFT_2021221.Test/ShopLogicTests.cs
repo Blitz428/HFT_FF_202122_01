@@ -17,16 +17,16 @@ namespace DYLHS5_HFT_2021221.Test
         private ShopLogic ShopLogic { get; set; }
 
         private Mock<IProductRepository> ProductRepositoryMock { get; set; }
-        private Mock<ICustomerRepository> CustomersRepositoryMock { get; set;}
+        private Mock<ICustomerRepository> CustomersRepositoryMock { get; set; }
         private Mock<IOrderRepository> OrderRepositoryMock { get; set; }
 
-        
-        
-        
+
+
+
         [SetUp]
         public void Setup()
         {
-            this.CustomersRepositoryMock= new Mock<ICustomerRepository>();
+            this.CustomersRepositoryMock = new Mock<ICustomerRepository>();
             this.ProductRepositoryMock = new Mock<IProductRepository>();
             this.OrderRepositoryMock = new Mock<IOrderRepository>();
 
@@ -94,8 +94,8 @@ namespace DYLHS5_HFT_2021221.Test
             OrderRepositoryMock.Setup(x => x.ReadAll())
                 .Returns(new List<Order>()
                 {order1,order2,order3,order4,order5,order6,order7,order8,order9,order10}.AsQueryable());
-            CustomersRepositoryMock.Setup(x=> x.ReadAll())
-                .Returns(new List<Customer>(){ customer1,customer2,customer3,customer4,customer5}.AsQueryable());
+            CustomersRepositoryMock.Setup(x => x.ReadAll())
+                .Returns(new List<Customer>() { customer1, customer2, customer3, customer4, customer5 }.AsQueryable());
 
 
             this.ShopLogic = new ShopLogic(this.CustomersRepositoryMock.Object, this.OrderRepositoryMock.Object, this.ProductRepositoryMock.Object);
@@ -108,7 +108,7 @@ namespace DYLHS5_HFT_2021221.Test
             Customer customer1 = new Customer() { CustomerId = 1, CustomerName = "A.Aladár", Address = "Randomcím1", PhoneNumber = 06701234567 };
             Product dorko1 = new Product() { ProductId = 1, ProductName = "BOUNCE", Color = "BROWN", Size = 41, Price = 24999 };
             Product adidas1 = new Product() { ProductId = 3, ProductName = "ORIGINALS CONTINENTAL 80 STRIPES", Color = "BLACK", Size = 42, Price = 29999 };
-            IEnumerable<Order> test= new List<Order>() 
+            IEnumerable<Order> test = new List<Order>()
             {
 
              new Order() { OrderId = 1, ProductId = 1, CustomerId = 1, IsPrePaid = true, IsTransportRequired = false, Product = dorko1, Customer = customer1 },
@@ -122,7 +122,7 @@ namespace DYLHS5_HFT_2021221.Test
         [Test]
         public void GetAddressesOfOrdersTest()
         {
-            Assert.AreEqual(4,ShopLogic.GetAddressesOfOrders().Count()); //there are four orders in mock repo which have customer with an address
+            Assert.AreEqual(4, ShopLogic.GetAddressesOfOrders().Count()); //there are four orders in mock repo which have customer with an address
 
 
         }
@@ -130,7 +130,7 @@ namespace DYLHS5_HFT_2021221.Test
         [Test]
         public void GetProductsWeNeedToTransportTest()
         {
-            Assert.AreEqual(5, ShopLogic.GetProductsWeNeedToTransport().Count() ); //there are five orders in mock repo where wee need to transport
+            Assert.AreEqual(5, ShopLogic.GetProductsWeNeedToTransport().Count()); //there are five orders in mock repo where wee need to transport
 
         }
 
@@ -143,7 +143,7 @@ namespace DYLHS5_HFT_2021221.Test
         [Test]
         public void GetPrePaidOrdersByCustomers()
         {
-            Assert.AreEqual(7,ShopLogic.GetPrePaidOrdersByCustomers().Count()); //there are seven
+            Assert.AreEqual(7, ShopLogic.GetPrePaidOrdersByCustomers().Count()); //there are seven
 
         }
 

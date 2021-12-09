@@ -14,7 +14,7 @@ namespace DYLHS5_HFT_2021221.Endpoint.Controllers
 
         public CustomerController(ICustomerLogic logic)
         {
-            this.logic = logic;       
+            this.logic = logic;
         }
 
         [HttpPost] // /customer

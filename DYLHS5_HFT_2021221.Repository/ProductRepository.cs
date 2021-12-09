@@ -15,7 +15,7 @@ namespace DYLHS5_HFT_2021221.Repository
         {
             this.ctx = ctx;
         }
-       
+
 
         public void Create(Product product)
         {
@@ -40,17 +40,14 @@ namespace DYLHS5_HFT_2021221.Repository
         {
             Product old = ReadOne(product.ProductId);
 
-            old.Orders = product.Orders;
-            old.Orders = product.Orders;
             old.Price = product.Price;
             old.Size = product.Size;
             old.Color = product.Color;
             old.ProductName = product.ProductName;
-            old.ProductId = product.ProductId;
-            
+
 
             ctx.SaveChanges();
-            
+
         }
 
         public void Delete(int? productId)

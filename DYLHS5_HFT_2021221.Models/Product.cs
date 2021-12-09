@@ -20,20 +20,20 @@ namespace DYLHS5_HFT_2021221.Models
         public string ProductName { get; set; }
 
         [Required]
-        public string Color {  get; set; }
+        public string Color { get; set; }
 
         [Required]
-        public int Size {  get; set; }
+        public int Size { get; set; }
 
-        public double? Price {  get; set; }
+        public double? Price { get; set; }
 
 
         [NotMapped]
         [JsonIgnore]
-        public virtual ICollection<Order> Orders {  get; set;}
+        public virtual ICollection<Order> Orders { get; set; }
         public Product()
         {
-            Orders=new List<Order>();
+            Orders = new List<Order>();
         }
     }
 }

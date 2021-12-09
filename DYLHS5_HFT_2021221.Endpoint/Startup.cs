@@ -28,7 +28,7 @@ namespace DYLHS5_HFT_2021221.Endpoint
         public void ConfigureServices(IServiceCollection services)
         {
             //services.AddRazorPages();
-            
+
 
             //Handling the dependency injections
             services.AddScoped<IOrderLogic, OrderLogic>();
