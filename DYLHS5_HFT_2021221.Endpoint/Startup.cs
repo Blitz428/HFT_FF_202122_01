@@ -40,6 +40,9 @@ namespace DYLHS5_HFT_2021221.Endpoint
             services.AddScoped<IProductLogic, ProductLogic>();
             services.AddScoped<IProductRepository, ProductRepository>();
 
+            services.AddScoped<IShopLogic, ShopLogic>();
+            services.AddScoped<IShopRepository, ShopRepository>();
+
             services.AddScoped<XYZDbContext, XYZDbContext>();
 
             services.AddControllers();

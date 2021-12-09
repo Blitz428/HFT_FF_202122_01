@@ -12,23 +12,25 @@ namespace DYLHS5_HFT_2021221.Client
         static void Main(string[] args)
         {
             XYZDbContext dbContext = new XYZDbContext();
-            Console.WriteLine("Client started successfully.");
-
             RestService restService = new RestService("http://localhost:27588/");
-            List<Order> orders = new List<Order>();
-            List<Product> products = new List<Product>();
-            List<Customer> customers = new List<Customer>();
+            List<Order> orders;
+            List<Product> products;
+            List<Customer> customers;
             Order order = new Order();
             Product product = new Product();
             Customer customer = new Customer();
-
+            Console.WriteLine("Client started successfully.");
             var menu = new ConsoleMenu()
 
                 //READALL
                 .Add("Get all...", () => new ConsoleMenu()
                 .Add("Orders", () =>
                 {
-                    restService.Get<Order>("/order").ForEach(order => Console.WriteLine(order.ToString()));
+                    orders = restService.Get<Order>("/order");
+                    foreach (Order order in orders)
+                    {
+                        Console.WriteLine("Order Id: " + order.OrderId + "\t Order time: " + order.OrderTime + "\t Prepaid: " + order.IsPrePaid + "\t Transport needed: " + order.IsTransportRequired);
+                    }
                     Console.ReadLine();
                 })
                 .Add("Products", () =>
@@ -36,7 +38,7 @@ namespace DYLHS5_HFT_2021221.Client
                     products = restService.Get<Product>("/product");
                     foreach (Product product in products)
                     {
-                        Console.WriteLine("Id:" + product.ProductId + "Name:" + product.ProductName + "Color:" + product.Color + "Size:" + product.Size + "Price:" + product.Price + "FT");
+                        Console.WriteLine("Product Id:" + product.ProductId + "\t Name: " + product.ProductName + "\t Color: " + product.Color + "\t Size: " + product.Size + "\t Price: " + product.Price + "FT");
                     }
                     Console.ReadLine();
                 })
@@ -45,7 +47,7 @@ namespace DYLHS5_HFT_2021221.Client
                     customers = restService.Get<Customer>("/customer");
                     foreach (Customer customer in customers)
                     {
-                        Console.WriteLine("Id:" + customer.CustomerId + "Name:" + customer.CustomerName + "Phone:" + customer.PhoneNumber + "Address:" + customer.Address);
+                        Console.WriteLine("Customer Id: " + customer.CustomerId + "\t Name: " + customer.CustomerName + "\t Phone: " + customer.PhoneNumber + "\t Address: " + customer.Address);
                     }
                     Console.ReadLine();
                 })
@@ -58,7 +60,7 @@ namespace DYLHS5_HFT_2021221.Client
                     Console.WriteLine("Enter an id!");
                     int id = int.Parse(Console.ReadLine());
                     order = restService.GetSingle<Order>("/order/"+id);
-                    Console.WriteLine("Order Id:" + order.OrderId + "Order time:" + order.OrderTime + "Prepaid:" + order.IsPrePaid + "Transport needed:" + order.IsTransportRequired);
+                    Console.WriteLine("Order Id: " + order.OrderId + "\t Order time: " + order.OrderTime + "\t Prepaid: " + order.IsPrePaid + "\t Transport needed: " + order.IsTransportRequired);
                     Console.ReadLine();
                 })
                 .Add("Product", () =>
@@ -66,7 +68,7 @@ namespace DYLHS5_HFT_2021221.Client
                     Console.WriteLine("Enter an id!");
                     int id = int.Parse(Console.ReadLine());
                     product = restService.GetSingle<Product>("/product/" + id);
-                    Console.WriteLine("Id:" + product.ProductId + "Name:" + product.ProductName + "Color:" + product.Color + "Size:" + product.Size + "Price:" + product.Price + "FT");
+                    Console.WriteLine("Product Id: " + product.ProductId + "\t Name: " + product.ProductName + "\t Color: " + product.Color + "\t Size: " + product.Size + "\t Price: " + product.Price + "FT");
                     Console.ReadLine();
                 })
                 .Add("Customer", () =>
@@ -74,7 +76,7 @@ namespace DYLHS5_HFT_2021221.Client
                     Console.WriteLine("Enter an id!");
                     int id = int.Parse(Console.ReadLine());
                     customer = restService.GetSingle<Customer>("/customer/" + id);
-                    Console.WriteLine("Id:" + customer.CustomerId + "Name:" + customer.CustomerName + "Phone:" + customer.PhoneNumber + "Address:" + customer.Address);
+                    Console.WriteLine("Customer Id: " + customer.CustomerId + "\t Name: " + customer.CustomerName + "\t Phone: " + customer.PhoneNumber + "\t Address: " + customer.Address);
                     Console.ReadLine();
                 })
                 .Add("Back", ConsoleMenu.Close).Show())
@@ -203,7 +205,7 @@ namespace DYLHS5_HFT_2021221.Client
                  })
                  .Add("Back", ConsoleMenu.Close).Show())
 
-
+                 //DELETE
                  .Add("Delete...", () => new ConsoleMenu()
                  .Add("Order", () =>
                  {
@@ -263,24 +265,33 @@ namespace DYLHS5_HFT_2021221.Client
                      string customername = Console.ReadLine();
                      Console.WriteLine();
                      orders = restService.Get<Order>("/shop/order-customer/"+customername);
+                     foreach (Order order in orders)
+                     {
+                         Console.WriteLine("Order Id: " + order.OrderId + "\t Order time: " + order.OrderTime + "\t Prepaid: " + order.IsPrePaid + "\t Transport needed: " + order.IsTransportRequired);
+                     }
                      Console.ReadLine();
                  
                     
-                 })
+                 }) //TESTED WITH: A.Aladár
                  .Add("GetAddressesOfOrders", () =>
                  {
-                     IEnumerable<KeyValuePair<Order, string>> keyValuePairs;
+                     IEnumerable<KeyValuePair<Order, string>> keyValuePairs = restService.Get<KeyValuePair<Order, string>>("/shop/address-order");
 
-                     
+                     foreach(KeyValuePair<Order,string> keyValuePair in keyValuePairs)
+                     {
 
+                         Console.WriteLine("\t Order id: " + keyValuePair.Key.OrderId + "\t Address: " + keyValuePair.Value);
+
+                     }
+                     Console.ReadLine();
 
                  })
                  .Add("GetProductsWeNeedToTransport", () =>
                  {
-                     products = restService.Get<Product>("/product-transport");
+                     products = restService.Get<Product>("/shop/product-transport");
                      foreach (Product product in products)
                      {
-                         Console.WriteLine("Id:" + product.ProductId + "Name:" + product.ProductName + "Color:" + product.Color + "Size:" + product.Size + "Price:" + product.Price + "FT");
+                         Console.WriteLine("Id:" + product.ProductId + "\t Name: " + product.ProductName + "\t Color: " + product.Color + "\t Size: " + product.Size + "\t Price: " + product.Price + "FT");
                      }
                      Console.ReadLine();
                  })
@@ -292,15 +303,21 @@ namespace DYLHS5_HFT_2021221.Client
                      customers = restService.Get<Customer>("/shop/customer-size/" + size);
                      foreach(Customer customer in customers)
                      {
-                        Console.WriteLine("Id:" + customer.CustomerId + "Name:" + customer.CustomerName + "Phone:" + customer.PhoneNumber + "Address:" + customer.Address);
+                        Console.WriteLine("Id: " + customer.CustomerId + "\t Name: " + customer.CustomerName + "\t Phone: " + customer.PhoneNumber + "\t Address: " + customer.Address);
+                     }
+                     Console.ReadLine();
+                 }) //TESTED WITH :42
+                 .Add("GetPrePaidOrdersByCustomers", () =>
+                 {
+                     IEnumerable<KeyValuePair<Customer, Order>> keyValuePairs = restService.Get<KeyValuePair<Customer, Order>>("/shop/prepaid-customer");
+                     foreach (KeyValuePair<Customer, Order> keyValuePair in keyValuePairs)
+                     {
+                         Console.WriteLine("Prepaid orders id: " + keyValuePair.Value.OrderId + "\t Customer: " + keyValuePair.Key.CustomerName);
+
                      }
                      Console.ReadLine();
                  })
-                 .Add("GetPrePaidOrdersByCustomers", () =>
-                 {
-
-                 })
-
+                  
 
                  .Add("Back", ConsoleMenu.Close).Show())
 
