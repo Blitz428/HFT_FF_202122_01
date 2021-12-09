@@ -26,7 +26,8 @@ namespace DYLHS5_HFT_2021221.Models
         [Required]
         public bool? IsTransportRequired { get; set; }
         
-        public virtual DateTime OrderTime { get { return OrderTime; } set { OrderTime = DateTime.Now; } }
+        private DateTime _ordertime;
+        public virtual DateTime OrderTime { get { return _ordertime; } set { _ordertime = DateTime.Now; } }
 
         [NotMapped]
         public virtual Product Product {  get; set; }
