@@ -27,7 +27,7 @@ namespace DYLHS5_HFT_2021221.Logic
 
             if (order.IsTransportRequired == null || order.IsPrePaid == null)
             {
-                throw new BooleanExpressionsAreNullException("One of the boolean expressions are missing, please fix.");
+                throw new BooleanExpressionsAreNullException("One of the boolean expressions are missing.");
             }
             orderRepo.Create(order);
 

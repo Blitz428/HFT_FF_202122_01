@@ -27,10 +27,6 @@ namespace DYLHS5_HFT_2021221.Logic
             {
                 throw new ProductOrCustomerNameMissingException("Product name missing!");
             }
-            if (product.ProductId == null)
-            {
-                throw new IdMissingException("Missing product ID");
-            }
             productRepo.Create(product);
         }
 
