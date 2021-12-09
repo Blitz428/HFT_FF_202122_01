@@ -111,12 +111,12 @@ namespace DYLHS5_HFT_2021221.Test
             Product adidas1 = new Product() { ProductId = 3, ProductName = "ORIGINALS CONTINENTAL 80 STRIPES", Color = "BLACK", Size = 42, Price = 29999 };
             Order order1 = new Order() { OrderId = 1, ProductId = 1, CustomerId = 1, IsPrePaid = true, IsTransportRequired = false, Product = dorko1, Customer = customer1 };
             Order order3 = new Order() { OrderId = 3, ProductId = 3, CustomerId = 1, IsPrePaid = true, IsTransportRequired = false, Product = adidas1, Customer = customer1 };
-            
+
             IEnumerable<Order> expected = new List<Order>() { order1, order3 };
-            
+
             IEnumerable<Order> actual = ShopLogic.GetOrdersByCustomername("A.Aladár").ToList();
 
-            
+
             Assert.AreEqual(expected.Last().Customer.CustomerName, actual.Last().Customer.CustomerName);
 
         }
@@ -133,7 +133,7 @@ namespace DYLHS5_HFT_2021221.Test
             Order order3 = new Order() { OrderId = 3, ProductId = adidas1.ProductId, CustomerId = customer1.CustomerId, IsPrePaid = true, IsTransportRequired = false, Product = adidas1, Customer = customer1 };
             Order order5 = new Order() { OrderId = 5, ProductId = nike1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false, Product = nike1, Customer = customer3 };
             Order order7 = new Order() { OrderId = 7, ProductId = converse1.ProductId, CustomerId = customer3.CustomerId, IsPrePaid = false, IsTransportRequired = false, Product = converse1, Customer = customer3 };
-            
+
 
             IEnumerable<KeyValuePair<Order, string>> expected = new List<KeyValuePair<Order, string>>()
             {
@@ -166,7 +166,7 @@ namespace DYLHS5_HFT_2021221.Test
 
 
             IEnumerable<Product> expected = new List<Product>() { dorko2, adidas2, converse2, vans1, vans2 };
-            Assert.AreEqual(expected.Last().ProductId,ShopLogic.GetProductsWeNeedToTransport().Last().ProductId);
+            Assert.AreEqual(expected.Last().ProductId, ShopLogic.GetProductsWeNeedToTransport().Last().ProductId);
         }
 
         [Test]
@@ -176,10 +176,10 @@ namespace DYLHS5_HFT_2021221.Test
             Customer customer3 = new Customer() { CustomerId = 3, CustomerName = "C.Cecília", PhoneNumber = 06701234569, Address = "Randomcim2" };
             Customer customer5 = new Customer() { CustomerId = 5, CustomerName = "E.Elvira", PhoneNumber = 06701234571 };
 
-            IEnumerable<Customer> expexted = new List<Customer>() { customer1, customer3,customer5 };
+            IEnumerable<Customer> expexted = new List<Customer>() { customer1, customer3, customer5 };
 
 
-            Assert.AreEqual(expexted.Last().CustomerName, ShopLogic.GetCustomersWithThisSize(41).Last().CustomerName); 
+            Assert.AreEqual(expexted.Last().CustomerName, ShopLogic.GetCustomersWithThisSize(41).Last().CustomerName);
         }
 
         [Test]

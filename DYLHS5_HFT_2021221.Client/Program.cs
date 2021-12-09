@@ -266,7 +266,7 @@ namespace DYLHS5_HFT_2021221.Client
 
                  //NON-CRUDS
                  .Add("NON-CRUDS...", () => new ConsoleMenu()
-                 .Add("GetOrdersByCustomername", () =>
+                 .Add("GetOrdersByCustomername - returns the orders of the specified customer", () =>
                  {
                      Console.WriteLine("Please enter the customer's name");
                      string customername = Console.ReadLine();
@@ -279,8 +279,8 @@ namespace DYLHS5_HFT_2021221.Client
                      Console.ReadLine();
 
 
-                 }) //TESTED WITH: A.Aladár
-                 .Add("GetAddressesOfOrders", () =>
+                 }) //TESTED WITH: A.Aladár 
+                 .Add("GetAddressesOfOrders - returns the orders with the addresses (if there is any)", () =>
                  {
                      IEnumerable<KeyValuePair<Order, string>> keyValuePairs = restService.Get<KeyValuePair<Order, string>>("/shop/address-order");
 
@@ -293,7 +293,7 @@ namespace DYLHS5_HFT_2021221.Client
                      Console.ReadLine();
 
                  })
-                 .Add("GetProductsWeNeedToTransport", () =>
+                 .Add("GetProductsWeNeedToTransport - returns the products which we have to deliver", () =>
                  {
                      products = restService.Get<Product>("/shop/product-transport");
                      foreach (Product product in products)
@@ -302,7 +302,7 @@ namespace DYLHS5_HFT_2021221.Client
                      }
                      Console.ReadLine();
                  })
-                 .Add("GetCustomersWithThisSize", () =>
+                 .Add("GetCustomersWithThisSize - returns the customers with the given size", () =>
                  {
 
                      Console.WriteLine("What is the size?");
@@ -314,7 +314,7 @@ namespace DYLHS5_HFT_2021221.Client
                      }
                      Console.ReadLine();
                  }) //TESTED WITH :42
-                 .Add("GetPrePaidOrdersByCustomers", () =>
+                 .Add("GetPrePaidOrdersByCustomers - returns prepaid orders with their customers", () =>
                  {
                      IEnumerable<KeyValuePair<Customer, Order>> keyValuePairs = restService.Get<KeyValuePair<Customer, Order>>("/shop/prepaid-customer");
                      foreach (KeyValuePair<Customer, Order> keyValuePair in keyValuePairs)
