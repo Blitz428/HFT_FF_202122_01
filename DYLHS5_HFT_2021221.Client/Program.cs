@@ -1,6 +1,5 @@
 ﻿using ConsoleTools;
 using DYLHS5_HFT_2021221.Data;
-using DYLHS5_HFT_2021221.Logic;
 using DYLHS5_HFT_2021221.Models;
 using System;
 using System.Collections.Generic;

@@ -1,17 +1,11 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using DYLHS5_HFT_2021221.Logic;
 using DYLHS5_HFT_2021221.Data;
 using DYLHS5_HFT_2021221.Repository;
-using Microsoft.EntityFrameworkCore;
 
 namespace DYLHS5_HFT_2021221.Endpoint
 {
