@@ -16,6 +16,7 @@ namespace DYLHS5_HFT_2021221.Logic
         IEnumerable<Product> GetProductsWeNeedToTransport();
 
         IEnumerable<Customer> GetCustomersWithThisSize(int size);
+        IEnumerable<KeyValuePair<Customer, Order>> GetPrePaidOrdersByCustomers();
 
 
     }

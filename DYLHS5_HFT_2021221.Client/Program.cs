@@ -260,15 +260,19 @@ namespace DYLHS5_HFT_2021221.Client
                  .Add("GetOrdersByCustomername", () =>
                  {
                      Console.WriteLine("Please enter the customer's name");
-                     int id = int.Parse(Console.ReadLine());
+                     string customername = Console.ReadLine();
                      Console.WriteLine();
-                     orders = restService.Get<Order>("order");
-
+                     orders = restService.Get<Order>("/shop/order-customer/"+customername);
+                     Console.ReadLine();
                  
                     
                  })
                  .Add("GetAddressesOfOrders", () =>
                  {
+                     IEnumerable<KeyValuePair<Order, string>> keyValuePairs;
+
+                     
+
 
                  })
                  .Add("GetProductsWeNeedToTransport", () =>
@@ -283,6 +287,14 @@ namespace DYLHS5_HFT_2021221.Client
                  .Add("GetCustomersWithThisSize", () =>
                  {
 
+                     Console.WriteLine("What is the size?");
+                     int size = int.Parse(Console.ReadLine());
+                     customers = restService.Get<Customer>("/shop/customer-size/" + size);
+                     foreach(Customer customer in customers)
+                     {
+                        Console.WriteLine("Id:" + customer.CustomerId + "Name:" + customer.CustomerName + "Phone:" + customer.PhoneNumber + "Address:" + customer.Address);
+                     }
+                     Console.ReadLine();
                  })
                  .Add("GetPrePaidOrdersByCustomers", () =>
                  {
@@ -294,7 +306,7 @@ namespace DYLHS5_HFT_2021221.Client
 
 
 
-                 .Add(">> EXIT", ConsoleMenu.Close);
+                 .Add("EXIT", ConsoleMenu.Close);
 
 
             menu.Show();

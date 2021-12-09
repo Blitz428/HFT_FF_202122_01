@@ -17,8 +17,8 @@ namespace DYLHS5_HFT_2021221.Endpoint.Controllers
             this.logic = logic;
 
         }
-        [HttpGet("order-customer")] // /shop/order-customer
-        public IEnumerable<Order> GetOrdersByCustomername([FromBody]string customername)
+        [HttpGet("order-customer/{customername}")] // /shop/order-customer
+        public IEnumerable<Order> GetOrdersByCustomername([FromRoute]string customername)
         {
             return logic.GetOrdersByCustomername(customername);
         }
@@ -33,8 +33,8 @@ namespace DYLHS5_HFT_2021221.Endpoint.Controllers
             return logic.GetProductsWeNeedToTransport();
         }
 
-        [HttpGet("customer-size")]  // /shop/customer-size
-        public IEnumerable<Customer> GetCustomersWithThisSize([FromBody]int size)
+        [HttpGet("customer-size/{size}")]  // /shop/customer-size/
+        public IEnumerable<Customer> GetCustomersWithThisSize([FromRoute]int size)
         {
             return logic.GetCustomersWithThisSize(size);
         }

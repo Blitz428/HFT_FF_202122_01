@@ -13,11 +13,12 @@ namespace DYLHS5_HFT_2021221.Test
     class OrderLogicTests
     {
         IOrderLogic logic;
+        Mock<IOrderRepository> mockedRepo;
 
         [SetUp]
         public void Setup()
         {
-            Mock<IOrderRepository> mockedRepo = new Mock<IOrderRepository>();
+            mockedRepo = new Mock<IOrderRepository>();
 
             //PRODUCTS
             Product dorko1 = new Product() { ProductId = 1, ProductName = "BOUNCE", Color = "BROWN", Size = 41, Price = 24999 };
@@ -84,38 +85,9 @@ namespace DYLHS5_HFT_2021221.Test
 
         }
 
-        [Test] //Create Exception #1
-        public void CreateOrderMissingProductNameTest()
-        {
-            Product dorko3 = new Product() { Color = "GREEN", Size = 42, Price = 20099 };
-            Customer customer6 = new Customer() { CustomerName = "F.Ferenc", PhoneNumber = 06701234572, Address = "Randomcím3" };
 
-            var createdOrder = new Order()
-            {
-                Product = dorko3,
-                Customer = customer6,
-                IsPrePaid = true,
-                IsTransportRequired = true
-            };
-
-            Assert.Throws<ProductOrCustomerNameMissingException>(() => logic.Create(createdOrder));
-        }
 
         [Test] //Create Exception #2
-        public void CreateOrderMissingCustomerTest()
-        {
-            Product dorko3 = new Product() { ProductName = "TEST", Color = "GREEN", Size = 42, Price = 20099 };
-            var createdOrder = new Order()
-            {
-                Product = dorko3,
-                IsPrePaid = true,
-                IsTransportRequired = true
-            };
-
-            Assert.Throws<NullReferenceException>(() => logic.Create(createdOrder));
-        }
-
-        [Test] //Create Exception #3
         public void CreateBooleanExpressionMissingTest()
         {
             Product dorko3 = new Product() { ProductName = "TEST", Color = "GREEN", Size = 42, Price = 20099 };
@@ -131,10 +103,24 @@ namespace DYLHS5_HFT_2021221.Test
 
         }
 
-
         
+        [Test]
+        public void GetOneOrderTest()
+        {
+            logic.GetOne(1);
+            mockedRepo.Verify(x=>x.ReadOne(1),Times.Once);
+        }
+        [Test]
+        public void GetOneOrderTest2()
+        {
+            
+            
+            Assert.Throws<MockException>(()=>mockedRepo.Verify(x => x.ReadOne(12), Times.Once));
+        }
 
-        
+
+
+
 
 
     }

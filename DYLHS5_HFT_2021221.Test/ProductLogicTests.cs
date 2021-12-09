@@ -88,7 +88,15 @@ namespace DYLHS5_HFT_2021221.Test
             logic = new ProductLogic(mockedRepo.Object);
 
         }
-        
- 
+        [Test] //Create Exception #3
+        public void CreateCustomerNameMissingTest()
+        {
+            Product dorko3 = new Product() { Color = "GREEN", Size = 42, Price = 20099 };
+            
+
+            Assert.Throws<ProductOrCustomerNameMissingException>(() => logic.Create(dorko3));
+
+        }
+
     }
 }

@@ -68,6 +68,16 @@ namespace DYLHS5_HFT_2021221.Client
             }
             return item;
         }
+        public T Get<T>(string msg, string endpoint)
+        {
+            T item = default(T);
+            HttpResponseMessage response = client.GetAsync(endpoint + "/" + msg).GetAwaiter().GetResult();
+            if (response.IsSuccessStatusCode)
+            {
+                item = response.Content.ReadAsAsync<T>().GetAwaiter().GetResult();
+            }
+            return item;
+        }
 
         public void Post<T>(T item, string endpoint)
         {

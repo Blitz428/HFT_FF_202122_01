@@ -15,11 +15,12 @@ namespace DYLHS5_HFT_2021221.Test
     class CustomerLogicTests
     {
         ICustomerLogic logic;
+        Mock<ICustomerRepository> mockedRepo;
 
         [SetUp]
         public void Setup()
         {
-            Mock<ICustomerRepository> mockedRepo = new Mock<ICustomerRepository>();
+            mockedRepo = new Mock<ICustomerRepository>();
 
             //PRODUCTS
             Product dorko1 = new Product() { ProductId = 1, ProductName = "BOUNCE", Color = "BROWN", Size = 41, Price = 24999 };
@@ -85,6 +86,28 @@ namespace DYLHS5_HFT_2021221.Test
             logic = new CustomerLogic(mockedRepo.Object);
 
         }
+        [Test] //Create Exception #1
+        public void CreateCustomerNameMissingTest()
+        {
+            Product dorko3 = new Product() { ProductName = "TEST", Color = "GREEN", Size = 42, Price = 20099 };
+            Customer customer6 = new Customer() { PhoneNumber = 06701234572, Address = "Randomcím3" };
+
+            Assert.Throws<ProductOrCustomerNameMissingException>(() => logic.Create(customer6));
+
+        }
+        [Test]
+        public void TestCreateAndRemoveCustomer()
+        {
+            Customer customer = new Customer() { CustomerId=6,CustomerName = "asd", PhoneNumber = 06701234572, Address = "Randomcím3" };
+            logic.Create(customer);
+            mockedRepo.Verify(x => x.Create(customer), Times.Once());
+            logic.Delete(6);
+            mockedRepo.Verify(x => x.Delete(6), Times.Once());
+        }
+
+
+
+
 
 
     }
