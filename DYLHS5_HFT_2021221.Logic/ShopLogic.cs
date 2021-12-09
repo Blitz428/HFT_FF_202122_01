@@ -24,23 +24,22 @@ namespace DYLHS5_HFT_2021221.Logic
         public IEnumerable<Order>GetOrdersByCustomername(string customername) //gives back the orders of the specified customer
         {
 
-            return  from x in this.orderRepo.ReadAll()
-                    join customer in this.customerRepo.ReadAll()
-                    on x.CustomerId equals customer.CustomerId
+            return  from order in orderRepo.ReadAll()
+                    join customer in customerRepo.ReadAll()
+                    on order.CustomerId equals customer.CustomerId
                     where customer.CustomerName == customername
-                    select x;
+                    select order;
 
 
            
         }
         public IEnumerable<KeyValuePair<Order,string>>GetAddressesOfOrders()
         {
-            return from x in orderRepo.ReadAll()
+            return from order in orderRepo.ReadAll()
                    join customer in customerRepo.ReadAll()
-                   on x.CustomerId equals customer.CustomerId
-                   where customer.CustomerId == x.CustomerId
+                   on order.CustomerId equals customer.CustomerId
                    where customer.Address !=null
-                   select new KeyValuePair<Order, string>(x, customer.Address);
+                   select new KeyValuePair<Order, string>(order, customer.Address);
 
         }
 
@@ -49,9 +48,32 @@ namespace DYLHS5_HFT_2021221.Logic
             return from product in productRepo.ReadAll()
                    join order in orderRepo.ReadAll()
                    on product.ProductId equals order.ProductId
-                   where order.ProductId == product.ProductId
                    where order.IsTransportRequired==true
                    select product;
+        }
+
+        public IEnumerable<Customer> GetCustomersWithThisSize(int size)
+        {
+            return from customer in customerRepo.ReadAll()
+                   join order in orderRepo.ReadAll()
+                   on customer.CustomerId equals order.CustomerId
+                   join product in productRepo.ReadAll()
+                   on order.ProductId equals product.ProductId
+                   where product.Size == size
+                   select customer;
+            
+        }
+
+        public IEnumerable<KeyValuePair<Customer, Order>> GetPrePaidOrdersByCustomers()
+        {
+            return from customer in customerRepo.ReadAll()
+                   join order in orderRepo.ReadAll()
+                   on customer.CustomerId equals order.CustomerId
+                   where order.IsPrePaid==true
+                   select new KeyValuePair<Customer, Order>(customer, order);
+
+
+
         }
 
 

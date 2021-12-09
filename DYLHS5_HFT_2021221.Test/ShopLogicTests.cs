@@ -130,7 +130,20 @@ namespace DYLHS5_HFT_2021221.Test
         [Test]
         public void GetProductsWeNeedToTransportTest()
         {
-            Assert.AreEqual(ShopLogic.GetProductsWeNeedToTransport().Count(), 5); //there are four orders in mock repo where wee need to transport
+            Assert.AreEqual(5, ShopLogic.GetProductsWeNeedToTransport().Count() ); //there are five orders in mock repo where wee need to transport
+
+        }
+
+        [Test]
+        public void GetCustomersWithThisSizeTest()
+        {
+            Assert.AreEqual(3, ShopLogic.GetCustomersWithThisSize(41).Count()); //there are three orders in mock repo where 
+        }
+
+        [Test]
+        public void GetPrePaidOrdersByCustomers()
+        {
+            Assert.AreEqual(7,ShopLogic.GetPrePaidOrdersByCustomers().Count()); //there are seven
 
         }
 
