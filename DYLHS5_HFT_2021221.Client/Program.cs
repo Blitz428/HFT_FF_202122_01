@@ -81,9 +81,59 @@ namespace DYLHS5_HFT_2021221.Client
 
                 //CREATE
                 .Add("Create new...",()=>new ConsoleMenu()
-                .Add("Order", () => { })
-                .Add("Product", () => { })
-                .Add("Customer", () => { })
+                .Add("Order", () => 
+                {
+                    bool prepaid;
+                    Console.WriteLine("Is the order prepaid? y/n");
+                    if (Console.ReadLine().Equals('y'))
+                    {
+                        prepaid = true;
+                    }
+                    else
+                    {
+                        prepaid = false;
+                    }
+
+                    Console.WriteLine("Does the order require transport? y/n");
+                    bool isTransportRequired;
+                    if (Console.ReadLine().Equals('y'))
+                    {
+                        isTransportRequired = true;
+                    }
+                    else
+                    {
+                        isTransportRequired = false;
+                    }
+                    restService.Post<Order>(new Order { IsPrePaid = prepaid, IsTransportRequired = isTransportRequired }, "/order");
+                    Console.WriteLine("Order added!");
+                    Console.ReadLine();
+                })
+                .Add("Product", () => 
+                {
+                    Console.WriteLine("Add product name!");
+                    string name= Console.ReadLine();
+                    Console.WriteLine("Add product color!");
+                    string color = Console.ReadLine();
+                    Console.WriteLine("Add product size!");
+                    int size = int.Parse(Console.ReadLine());
+                    Console.WriteLine("Add product price!");
+                    double price=double.Parse(Console.ReadLine());
+
+                    restService.Post<Product>(new Product { ProductName = name, Color = color, Price = price, Size = size }, "/product");
+                    Console.WriteLine("Product added!");
+                    Console.ReadLine();
+                })
+                .Add("Customer", () => 
+                {
+                    Console.WriteLine("Add customer name!");
+                    string name = Console.ReadLine();
+                    Console.WriteLine("Add customer phone number!");
+                    long number = long.Parse(Console.ReadLine());
+                    Console.WriteLine("Add customer address!");
+                    string address = Console.ReadLine();
+
+                    restService.Post<Customer>(new Customer { Address = address, CustomerName = name, PhoneNumber = number }, "/customer");
+                })
                 .Add("Back", ConsoleMenu.Close).Show())
 
 
